@@ -26,4 +26,4 @@ front_urls = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+] + front_urls

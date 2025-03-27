@@ -61,6 +61,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+
 # Local settings import fron local_settings.py
 DATABASES = LOCAL_DATABASES
 
@@ -69,6 +70,7 @@ DEBUG = LOCAL_DEBUG
 ALLOWED_HOSTS = LOCAL_ALLOWED_HOSTS
 
 SECRET_KEY = LOCAL_SECRET_KEY
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
