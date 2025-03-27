@@ -12,23 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from .local_setting import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#s&l!7qq)c!r*1l*(r1-^(7dr+wj(5j%u#44bh-%%+92aqr@y3'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,6 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My Apps.
+    "apps.account",
+    "apps.main",
 ]
 
 MIDDLEWARE = [
@@ -49,12 +41,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'health_agent.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,19 +59,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'health_agent.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
+# Local settings import fron local_settings.py
+DATABASES = LOCAL_DATABASES
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+DEBUG = LOCAL_DEBUG
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+ALLOWED_HOSTS = LOCAL_ALLOWED_HOSTS
 
+SECRET_KEY = LOCAL_SECRET_KEY
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
