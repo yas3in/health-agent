@@ -1,13 +1,27 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static "account/login.css" %}">
+    <title>ورود/ ثبت نام | خرجبان</title>
+    <script src="{% static "account/login.css" %}"></script>
 </head>
 <body>
-    <h2>
-        Hello Welcome Login page.
-    </h2>
+    <div class="container">
+        <div class="form">
+            <p id="description">صفحه ورود به حساب کاربری</p>
+            <form action="" method="post">
+                <label id="username-label" for="username">نام کاربری</label>
+                <input id="username-input" name="username" type="text" placeholder="نام کاربری خود را وارد کنید">
+                <label for="password">رمزعبور</label>
+                <input id="password-input" name="password" type="text" placeholder="پسورد">
+                <a href="#" id="forget">فراموشی رمز عبور</a>
+                <input type="submit" value="تایید" name="submit" id="submit">
+            </form>
+        </div>
+    </div>   
 </body>
 </html>
