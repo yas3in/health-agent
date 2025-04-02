@@ -7,16 +7,6 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
 
 
-class FrontLoginView(LoginView):
-    template_name = 'account/login.html'
-    redirect_authenticated_user = True
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('user-panel')
-        return super().dispatch(request, *args, **kwargs)
-    
-
 def login_view(request):
     if request.method == "POST":
         response = request.POST.get('next', '/')
@@ -54,5 +44,7 @@ def signup_view(request):
             return redirect('login')
         return redirect('signup')
     else:
+        if request.user.is_authenticated:
+            return redirect('user-panel')
         return render(request, "account/signup.html")
 
