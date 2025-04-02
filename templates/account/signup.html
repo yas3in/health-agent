@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "account/login.css" %}">
-    <title>ورود | گزارشنامه</title>
+    <title>ورود/ ثبت نام | خرجبان</title>
     <script src="{% static "account/login.css" %}"></script>
 </head>
 <body>
@@ -17,6 +17,8 @@
                 {% csrf_token %}
                 <label id="username-label" for="username">نام کاربری</label>
                 <input id="username-input" name="username" type="text" placeholder="نام کاربری خود را وارد کنید">
+                <label id="email-label" for="email">ایمیل</label>
+                <input id="email-input" name="email" type="text" placeholder="ایمیل خود را وارد کنید">
                 <label for="password">رمزعبور</label>
                 <input id="password-input" name="password" type="text" placeholder="پسورد">
                 <a href="#" id="forget">فراموشی رمز عبور</a>
