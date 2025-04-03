@@ -1,13 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        Hello.
-    </h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block page-title %} پنل کاربری {% endblock page-title %}
+
+{% block style %} {% static 'main/css/user_panel.css' %} {% endblock style %}
+
+{% block content %}
+    <div class="container">
+        <div class="datas">
+            <div class="my-reports">
+                <h2>
+                    name: ...    
+                </h2>
+                <p>
+                    description: ...
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

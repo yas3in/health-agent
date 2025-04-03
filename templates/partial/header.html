@@ -4,7 +4,7 @@
 <div class="header">
     <nav class="navbar fixed-top">
       <div class="desktop-logo">
-        <a href="{% url 'index' %}" class="desktop">خرجبان</a>
+        <a href="{% url 'index' %}" class="desktop">data voice</a>
       </div>
       <div class="menu-toggle" id="mobile-menu">
           <span class="bar"></span>
@@ -12,13 +12,13 @@
           <span class="bar"></span>
       </div>
         <ul class="nav-list">
-          <li><a href="{% url 'report-list' %}">گزارش ها</a></li>
+          <li><a href="{% url 'report-list' %}">reports</a></li>
           {% if request.user.is_authenticated %}
-          <li><a id="panels" href="{% url 'user-panel' %}">پنل کاربری</a></li>
+          <li><a id="panels" href="{% url 'user-panel' %}">panels</a></li>
           {% else %}
-          <li><a id="panels" href="{% url 'login' %}">ورود / ثبت نام</a></li>
+          <li><a id="panels" href="{% url 'login' %}">login / signup</a></li>
           {% endif %}
-          <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+          <li><a href="{% url 'index' %}">main page</a></li>
         </ul>
     </nav>
   </div>
