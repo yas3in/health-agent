@@ -1,0 +1,125 @@
+.datas {
+    margin-top: 100px;
+    width: 100%;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    
+}
+
+.my-reports {
+    background-color: #252A34;
+    text-align: right;
+    direction: rtl;
+    height: 150px;
+    width: 850px;
+    margin-right: 275px;
+    margin-left: 275px;
+    direction: rtl;
+    opacity: 90%;
+    padding: 5px;
+    float: right;
+    border: 2px solid #252A34;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0px 5px 10px 5px #252A34;
+}
+
+.my-reports p {
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #EAEAEA;
+    margin-right: 30px;
+}
+
+
+.my-reports h2 {
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #EAEAEA;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 950px) {
+    .data-table {
+        margin: 0px;
+        width: 100%;
+        display: block;
+    }
+
+    .data-table p {
+        font-size: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: #EAEAEA;
+    }
+    
+    .data-table table td {
+        font-size: 10px; /* اندازه متن در سلول‌ها */
+    }
+
+    .income {
+        width: 100%;
+        margin: 0;
+        flex: 1 1 100%; /* هر مربع تمام عرض را می‌گیرد */
+        display: none;
+    }
+
+    .datas {
+        flex-direction: column; /* مربع‌ها زیر هم قرار می‌گیرند */ 
+    }
+
+    .variable-cost {
+        margin: 0px;
+        width: 100%;
+        display: block;
+        padding: 0px;
+        float: none;
+    }
+
+    .variable-cost ul {
+        margin-right: 30px;
+        margin-top: 5px;
+        list-style: georgian;
+        line-height: 20px;
+    }
+    
+    .variable-cost ul li {
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        color: #EAEAEA;
+    }
+    
+    .data-notable2 {
+        margin: 0px;
+        width: 100%;
+        display: none;
+    }
+    .side-bar{
+        width: 150px;
+        height: 100%;
+        margin-top: 100px;
+    }
+    .side-bar p {
+        margin-top: 20px;
+        font-size: 15px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .data-table p {
+        font-size: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: #EAEAEA;
+    }
+    
+    .data-table table td {
+        font-size: 8px; /* اندازه متن در سلول‌ها */
+    }
+}

@@ -22,6 +22,8 @@ admin_urls = [
 
 front_urls = [
     path("account/", include("apps.account.urls.front")),
+    path("reports/", include("apps.report.urls.front")),
+    path("", include("apps.main.urls.front")),
 ]
 
 urlpatterns = [
