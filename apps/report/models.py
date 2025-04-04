@@ -1,7 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class Question(models.Model):
+    question = models.TextField()
+
+
+class Answer(models.Model):
+    answer = models.TextField()
 
 
 class Report(models.Model):
-    pass
+    name = models.CharField()
+    user = models.ForeignKey(User, related_name="user", null=True, blank=True)
+    question = models.ForeignKey(Question, related_name="user")
+    answer = models.ForeignKey(Answer, related_name="asnwer", null=True, blank=True)

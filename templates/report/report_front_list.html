@@ -8,6 +8,7 @@
 {% block content %}
     <div class="container">
         <div class="datas">
+            {% for i in ["1", "2", "3"] %}
             <div class="my-reports">
                 <h2>
                     name: ...    
@@ -16,6 +17,7 @@
                     description: ...
                 </p>
             </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}
