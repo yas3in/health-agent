@@ -5,12 +5,12 @@ from .models import Answer, Question, Report
 
 @register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ("answer",)
+    list_display = ("user", "question", "answer")
 
 
 @register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("question",)
+    list_display = ("report", "question")
 
 
 class AnswerInline(admin.TabularInline):
@@ -23,5 +23,5 @@ class QuestionInline(admin.TabularInline):
 
 @register(Report)
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ("name", "user", "answer", "question")
-    inlines = [QuestionInline, AnswerInline]
+    list_display = ("name", "description", "created_time")
+    inlines = [QuestionInline]

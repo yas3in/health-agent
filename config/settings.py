@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     # My Apps.
     "apps.account",
     "apps.main",
-    "apps.report"
+    "apps.report",
 ]
 
 MIDDLEWARE = [
@@ -65,7 +65,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Local settings import fron local_settings.py
-DATABASES = LOCAL_DATABASES
+# DATABASES = LOCAL_DATABASES
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 DEBUG = LOCAL_DEBUG
 
