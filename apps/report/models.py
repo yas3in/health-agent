@@ -7,13 +7,22 @@ class Report(models.Model):
     description = models.TextField(blank=True)
     created_time = models.TimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+    
 
 class Question(models.Model):
-    report = models.ForeignKey(Report, related_name="question", on_delete=models.CASCADE)
+    report = models.ForeignKey(Report, related_name="question_report", on_delete=models.CASCADE)
     question = models.TextField()
+
+    def __str__(self):
+        return f"{self.report} - {self.question}"
 
 
 class Answer(models.Model):
-    user = models.ForeignKey(User, related_name="answer", on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, related_name="answer", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="answer_user", on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name="answer_question", on_delete=models.CASCADE)
     answer = models.TextField()
+    
+    def __str__(self):
+        return f"{self.question} - {self.answer}"

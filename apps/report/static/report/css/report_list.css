@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.datas {
+    margin-top: 100px;
+    width: 100%;
+    margin-right: 320px;
+    margin-left: 320px;
+    direction: rtl;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    
+}
+
+.reports {
+    background-color: #FFF1D5;
+    text-align: right;
+    height: 150px;
+    width: 100%;
+    opacity: 90%;
+    padding: 5px;
+    float: right;
+    border: 2px solid #FFF1D5;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0px 5px 10px 5px #aaa8a6;
+    color: #123458;
+    margin-bottom: 30px;
+}
+
+.reports p {
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #123458;
+    margin-right: 30px;
+}
+
+
+.reports h2 {
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #123458;
+    padding-top: 10px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 950px) {
+    .data-table {
+        margin: 0px;
+        width: 100%;
+        display: block;
+    }
+
+    .data-table p {
+        font-size: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: #EAEAEA;
+    }
+    
+    .data-table table td {
+        font-size: 10px; /* اندازه متن در سلول‌ها */
+    }
+
+    .income {
+        width: 100%;
+        margin: 0;
+        flex: 1 1 100%; /* هر مربع تمام عرض را می‌گیرد */
+        display: none;
+    }
+
+    .datas {
+        flex-direction: column; /* مربع‌ها زیر هم قرار می‌گیرند */ 
+    }
+
+    .variable-cost {
+        margin: 0px;
+        width: 100%;
+        display: block;
+        padding: 0px;
+        float: none;
+    }
+
+    .variable-cost ul {
+        margin-right: 30px;
+        margin-top: 5px;
+        list-style: georgian;
+        line-height: 20px;
+    }
+    
+    .variable-cost ul li {
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        color: #EAEAEA;
+    }
+    
+    .data-notable2 {
+        margin: 0px;
+        width: 100%;
+        display: none;
+    }
+    .side-bar{
+        width: 150px;
+        height: 100%;
+        margin-top: 100px;
+    }
+    .side-bar p {
+        margin-top: 20px;
+        font-size: 15px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .data-table p {
+        font-size: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: #EAEAEA;
+    }
+    
+    .data-table table td {
+        font-size: 8px; /* اندازه متن در سلول‌ها */
+    }
+}

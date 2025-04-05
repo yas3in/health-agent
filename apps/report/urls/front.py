@@ -1,8 +1,9 @@
 from django.urls import path
 
-from apps.report.views.front import ReportListView
+from apps.report.views.front import report_detail_view, report_list_view
 
 
 urlpatterns = [
-    path("", ReportListView.as_view(), name="report-list")
+    path("", report_list_view, name="report-list"),
+    path("<int:id>/", report_detail_view, name="report-detail"),
 ]
