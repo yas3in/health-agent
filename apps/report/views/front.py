@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from apps.report.models import Answer, Report
+from apps.report.models import Answer, Question, Report
 
 
 
@@ -12,4 +12,5 @@ def report_list_view(request):
 
 def report_detail_view(request, id):
     report = Report.objects.get(id=id)
-    return render(request, "report/report_detail.html", {"report": report})
+    questions = Question.objects.filter(report=report)
+    return render(request, "report/report_detail.html", {"report": report, "questions": questions})

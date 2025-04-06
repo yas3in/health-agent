@@ -15,3 +15,6 @@ LOCAL_ALLOWED_HOSTS = ['*']
 #     }
 # }
 
+
+AVALAI_BASE_URL = "https://api.avalai.ir/v1"
+AVALAI_API_URL = "aa-wwh0KPt05NCHKNtYPm6PQgDVNEBCXkIaVhWbuY1YlU4dCUqd"

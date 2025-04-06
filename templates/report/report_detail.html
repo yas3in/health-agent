@@ -8,16 +8,77 @@
 {% block content %}
     <div class="container">
         <div class="datas">
-            {% for report in reports %}
             <div class="reports">
-                <h2>
-                    <a href="{% url "report-detail" report.id %}">{{report.name}}</a>
-                </h2>
-                <p>
-                    {{report.description}}
-                </p>
+                {% for question in questions %}
+                <div class="question">
+                    {{question.question}}?
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <div class="voice-button">
+                <button id="startButton">شروع ضبط</button>
+                <button id="stopButton" disabled>متوقف کردن ضبط</button>
+                <audio id="audioPlayer" controls></audio>
+                <button id="sendButton" disabled>ارسال به بک‌اند</button>
+
+                <script>
+                    let mediaRecorder;
+                    let audioChunks = [];
+
+                    // دسترسی به میکروفن
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then(stream => {
+                            mediaRecorder = new MediaRecorder(stream);
+
+                            mediaRecorder.ondataavailable = event => {
+                                audioChunks.push(event.data);
+                            };
+
+                            mediaRecorder.onstop = () => {
+                                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                                const audioUrl = URL.createObjectURL(audioBlob);
+                                document.getElementById('audioPlayer').src = audioUrl;
+                                // فعال کردن دکمه ارسال بعد از ضبط
+                                document.getElementById('sendButton').disabled = false;
+                                // ذخیره Blob برای ارسال به بک‌اند
+                                window.audioBlob = audioBlob;
+                            };
+                        })
+                        .catch(error => {
+                            console.error("دسترسی به میکروفن با خطا مواجه شد:", error);
+                        });
+
+                    document.getElementById('startButton').addEventListener('click', () => {
+                        audioChunks = [];
+                        mediaRecorder.start();
+                        document.getElementById('startButton').disabled = true;
+                        document.getElementById('stopButton').disabled = false;
+                    });
+
+                    document.getElementById('stopButton').addEventListener('click', () => {
+                        mediaRecorder.stop();
+                        document.getElementById('startButton').disabled = false;
+                        document.getElementById('stopButton').disabled = true;
+                    });
+
+                    document.getElementById('sendButton').addEventListener('click', () => {
+                        const formData = new FormData();
+                        formData.append('audio_file', window.audioBlob, 'recorded_audio.wav');
+
+                        fetch('/upload_audio/', {
+                            method: 'POST',
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('صدا با موفقیت ارسال شد:', data);
+                        })
+                        .catch(error => {
+                            console.error('خطا در ارسال صدا:', error);
+                        });
+                    });
+                </script>
+            </div>
         </div>
     </div>
 {% endblock content %}
