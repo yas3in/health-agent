@@ -16,6 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+
+from config import settings
+
 
 admin_urls = [
 ]
@@ -24,8 +28,9 @@ front_urls = [
     path("account/", include("apps.account.urls.front")),
     path("reports/", include("apps.report.urls.front")),
     path("", include("apps.main.urls.front")),
+    path("audio/", include("apps.voice_process.urls.front")),
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-] + front_urls
+] + front_urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
