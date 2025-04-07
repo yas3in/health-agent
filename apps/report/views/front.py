@@ -21,9 +21,13 @@ def report_detail_view(request, id):
         questions = Question.objects.filter(report=report)
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
     else:
-        audio_file = request.FILES["audio_file"]
         report = Report.objects.get(id=id)
+
+
+        audio_file = request.FILES["audio_file"]
         in_memory_file = io.BytesIO(audio_file.read())
         in_memory_file.seek(0)
         voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report)
+        
+        
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
