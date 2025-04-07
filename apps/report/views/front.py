@@ -1,14 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
 from apps.report.models import Answer, Question, Report
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-
 from apps.voice_process.models import Voice
+from apps.voice_process import utils
+
+from pydub import AudioSegment
+import io
 
 
 def report_list_view(request):
@@ -25,9 +23,7 @@ def report_detail_view(request, id):
     else:
         audio_file = request.FILES["audio_file"]
         report = Report.objects.get(id=id)
-        voice_count = Voice.objects.filter(user=request.user).count()
-        if voice_count <= 10:
-            file_path = Voice.objects.create(
-                user=request.user, report=report, audio_file=audio_file
-            )
-        return JsonResponse({'message': 'فایل با موفقیت ذخیره شد', 'file_path': file_path})
+        in_memory_file = io.BytesIO(audio_file.read())
+        in_memory_file.seek(0)
+        voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report)
+        return render(request, "report/report_detail.html", {"report": report, "questions": questions})
