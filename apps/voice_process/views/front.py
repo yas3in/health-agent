@@ -9,8 +9,7 @@ from django.core.files.base import ContentFile
 @require_POST
 def voice_process(request):
     audio_file = request.FILES["audio_file"]
-    print(audio_file)
-    
+    form = request.kwargs
+    print(request)
     file_path = default_storage.save(f'audios/{audio_file.name}', ContentFile(audio_file.read()))
-    print("in views")
     return JsonResponse({'message': 'فایل با موفقیت ذخیره شد', 'file_path': file_path})

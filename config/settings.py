@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "apps.account",
     "apps.main",
     "apps.report",
+    "apps.voice_process"
 ]
 
 MIDDLEWARE = [
