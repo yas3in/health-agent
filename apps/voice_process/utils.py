@@ -7,6 +7,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 from apps.report.models import Answer, Question, Report
+from apps.voice_process.models import Voice
 
 
 load_dotenv()
@@ -49,20 +50,39 @@ class VoiceProcess:
             response_format="text"
         )
         return transcription
-
+    
     @classmethod
-    def handler(cls, report, voice, user):
-        text = cls.voice_process_api(voice)
-
-        question_dict = {}
-        report = Report.objects.get(name=report)
-        question_quesryset = report.question_report.all()
-        for i in question_quesryset:
-            question_dict[i.question] =  "بدون پاسخ"
-        finaly_text = cls.chat_completions_api(text, question_dict)
+    def save_answer(cls, user, finaly_text):
         dict_text = json.loads(finaly_text)
         for i in dict_text.items():
             question_instance = Question.objects.get(question=i[0])
             answers = Answer.objects.create(
                 user=user, question=question_instance, answer=i[1]
             )
+        return True
+            
+    @classmethod
+    def handler(cls, report, voice, user):
+        text = cls.voice_process_api(voice)
+    
+        question_dict = {}
+        report = Report.objects.get(name=report)
+        question_quesryset = report.question_report.all()
+        for i in question_quesryset:
+            question_dict[i.question] =  "بدون پاسخ"
+        finaly_text = cls.chat_completions_api(text, question_dict)
+        svae_answer = cls.save_answer(user, finaly_text)
+        return True
+
+
+def save_voice(user, report, voice):
+    counts = Voice.objects.filter(user=user).count()
+    print(counts)
+    try:
+        if counts < 10:
+            instance = Voice.objects.create(
+                user=user, report=report, audio_file=voice
+            )
+            return instance
+    except Exception as e:
+        raise e
