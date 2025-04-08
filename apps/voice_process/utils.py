@@ -47,4 +47,5 @@ class VoiceProcess:
             file=voice, 
             response_format="text"
         )
+        print(transcription)
         return transcription
