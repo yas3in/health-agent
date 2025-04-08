@@ -1,17 +1,18 @@
 import os
+import json
 
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
 from dotenv import load_dotenv
 
-from apps.report.models import Report
+from apps.report.models import Answer, Question, Report
+
 
 load_dotenv()
 
 AVALAI_API_KEY = os.getenv("AVALAI_API_KEY")
 AVALAI_BASE_URL = os.getenv("AVALAI_BASE_URL")
-
 
 class VoiceProcess:
 
@@ -25,6 +26,7 @@ class VoiceProcess:
             یک متن هم بهت میدم هر کدوم پاسخ این سوالات بود استخراج کن و با بدون پاسخ جایگزین کن
              هر کدوم هم نبود تغییرش نده
             لیست سوالات = {questions}
+            توی پاسخ از /n استفاده نکن و یکاری کن وقتی من content رو گرفتم تبدیلش کنم به دیکشنری
             لطفاً فقط JSON خالص برگردانید و از افزودن متن اضافی مثل ```json یا توضیحات خودداری کنید.
         """},
             {"role": "user", "content": text},
@@ -46,11 +48,10 @@ class VoiceProcess:
             file=voice, 
             response_format="text"
         )
-        print(transcription)
         return transcription
 
     @classmethod
-    def handler(cls, report, voice):
+    def handler(cls, report, voice, user):
         text = cls.voice_process_api(voice)
 
         question_dict = {}
@@ -58,8 +59,10 @@ class VoiceProcess:
         question_quesryset = report.question_report.all()
         for i in question_quesryset:
             question_dict[i.question] =  "بدون پاسخ"
-        print(question_dict)
         finaly_text = cls.chat_completions_api(text, question_dict)
-        print(
-            f"voice: {text} - finaly text: {finaly_text}"
-        )
+        dict_text = json.loads(finaly_text)
+        for i in dict_text.items():
+            question_instance = Question.objects.get(question=i[0])
+            answers = Answer.objects.create(
+                user=user, question=question_instance, answer=i[1]
+            )

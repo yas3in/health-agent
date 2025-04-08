@@ -28,5 +28,5 @@ def report_detail_view(request, id):
     else:
         audio_file = request.FILES["audio_file"]
         in_memory_file = StreamingFile(audio_file)
-        voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report)
+        voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
