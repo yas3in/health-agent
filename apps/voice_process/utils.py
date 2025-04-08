@@ -15,19 +15,18 @@ AVALAI_BASE_URL = os.getenv("AVALAI_BASE_URL")
 
 class VoiceProcess:
 
-    def __init__(self):
-        pass
-
-    @classmethod
-    def handler(cls, report, voice):
-        text = cls.voice_process_api(voice)
-        print(report)
-        finaly_text = cls.chat_completions_api(text)
-
     @staticmethod
-    def chat_completions_api(text):
+    def chat_completions_api(text, questions):
         messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": f"""
+            شما یک دستیار مفید هستید که برای استخراج اطلاعات مرتبط با سلامت از گزارش‌های روزانه طراحی شده‌اید.
+            اطلاعات را در قالب JSON با کلیدهای زیر برگردانید:
+            من به شما یک دیکشنری از سوالات میدم که کلیدشون بدون پاسخ هست
+            یک متن هم بهت میدم هر کدوم پاسخ این سوالات بود استخراج کن و با بدون پاسخ جایگزین کن
+             هر کدوم هم نبود تغییرش نده
+            لیست سوالات = {questions}
+            لطفاً فقط JSON خالص برگردانید و از افزودن متن اضافی مثل ```json یا توضیحات خودداری کنید.
+        """},
             {"role": "user", "content": text},
         ]
         model_name = "gpt-4o-mini"
@@ -49,3 +48,18 @@ class VoiceProcess:
         )
         print(transcription)
         return transcription
+
+    @classmethod
+    def handler(cls, report, voice):
+        text = cls.voice_process_api(voice)
+
+        question_dict = {}
+        report = Report.objects.get(name=report)
+        question_quesryset = report.question_report.all()
+        for i in question_quesryset:
+            question_dict[i.question] =  "بدون پاسخ"
+        print(question_dict)
+        finaly_text = cls.chat_completions_api(text, question_dict)
+        print(
+            f"voice: {text} - finaly text: {finaly_text}"
+        )
