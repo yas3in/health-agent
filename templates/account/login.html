@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "account/login.css" %}">
-    <title>ورود | گزارشنامه</title>
-    <script src="{% static "account/login.css" %}"></script>
+    <title>ورود | data voice</title>
+    <script src="{% static "account/login.js" %}"></script>
 </head>
 <body>
     <div class="container">
@@ -15,6 +15,7 @@
             <p id="description">صفحه ورود به حساب کاربری</p>
             <form action="" method="post">
                 {% csrf_token %}
+                <a href="{% url "signup" %}" class="login-button">رفتن به صفحه ثبت نام</a>
                 <label id="username-label" for="username">نام کاربری</label>
                 <input id="username-input" name="username" type="text" placeholder="نام کاربری خود را وارد کنید">
                 <label for="password">رمزعبور</label>

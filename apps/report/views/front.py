@@ -1,6 +1,8 @@
+from time import sleep
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from apps.report.models import Question, Report
 from apps.report.utils import LimeSurvay, main
@@ -22,8 +24,8 @@ def report_list_view(request):
 
 
 @login_required
-def report_detail_view(request, id):
-    report = Report.objects.get(id=id)
+def report_detail_view(request, sid):
+    report = Report.objects.get(sid=sid)
     questions = Question.objects.filter(report=report)
     if request.method == "GET":
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
@@ -35,6 +37,12 @@ def report_detail_view(request, id):
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
     
 
-def limesurvey_view(request):
-    check = main()
-    return HttpResponse(check)
+@staff_member_required
+def add_report_to_django(request):
+    if request.method == "GET":
+        return render(request, "report/add_form.html") 
+    if request.method == "POST":
+        sleep
+        check = main()
+        if check:
+            return render(request, "report/add_form.html")

@@ -11,7 +11,7 @@
             {% for report in reports %}
             <div class="reports">
                 <h2>
-                    <a href="{% url "report-detail" report.id %}">{{report.name}}</a>
+                    <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
                 </h2>
                 <p>
                     {{report.description}}

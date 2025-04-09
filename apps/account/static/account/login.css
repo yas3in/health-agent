@@ -30,12 +30,19 @@ body {
 }
 
 form {
-    padding: 50px 150px;
+    padding: 40px 150px;
     width: 100%;
 }
 
 
 /* input adn label style*/
+
+.login-button {
+    color: #EAEAEA;
+    text-align: center;
+    margin: 30px;
+    padding-bottom: 30px;
+}
 
 label, input {
     display: block;
@@ -64,10 +71,14 @@ input:focus::placeholder {
 }
 
 label {
+    margin-top: 3px;
     color: #EAEAEA;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
+#username-label {
+    margin-top: 10px;
+}
 
 /* submit style */
 
