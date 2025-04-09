@@ -1,10 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from apps.report.models import Question, Report
+from apps.report.utils import LimeSurvay, main
 from apps.voice_process import utils
 
 from io import BytesIO
+import json
 
 
 class StreamingFile(BytesIO):
@@ -30,3 +33,8 @@ def report_detail_view(request, id):
         in_memory_file = StreamingFile(audio_file)
         voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
+    
+
+def limesurvey_view(request):
+    check = main()
+    return HttpResponse(check)

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Report(models.Model):
+    sid = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=480)
     description = models.TextField(blank=True)
     created_time = models.TimeField(auto_now_add=True)

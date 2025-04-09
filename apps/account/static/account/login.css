@@ -12,8 +12,8 @@
 body {
     background-color: #BDDDE4;
     justify-items: center;
+    width: 100%;
 }
-
 
 /* form style */
 
@@ -100,4 +100,12 @@ label {
     justify-items: center;
     justify-content: center;
     text-align: center;
+}
+
+
+@media screen and (max-width:768) {
+    .form {
+        width: 100px;
+        height: 200px;
+    }
 }
