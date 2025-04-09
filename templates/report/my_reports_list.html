@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page-title %} My Reports {% endblock page-title %}
+{% block page-title %} report list {% endblock page-title %}
 
-{% block style %} {% static 'report/css/my_report.css' %} {% endblock style %}
+{% block style %} {% static 'report/css/report_list.css' %} {% endblock style %}
 
 {% block content %}
     <div class="container">
         <div class="datas">
             {% for report in reports %}
-            <div class="my-reports">
+            <div class="reports">
                 <h2>
-                    {{report.name}}
+                    <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
                 </h2>
                 <p>
                     {{report.description}}

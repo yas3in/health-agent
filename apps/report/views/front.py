@@ -48,3 +48,12 @@ def add_report_to_django(request):
             return redirect("admin")
         raise Exception("error in add report")
         
+
+@login_required
+def my_reports_list(request):
+    return render(request, "report/my_reports_list.html")
+
+
+@login_required
+def my_reports_detail(request):
+    return render(request, "report/my_reports_detail.html")

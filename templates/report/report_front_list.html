@@ -14,7 +14,7 @@
                     <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
                 </h2>
                 <p>
-                    {{report.description}}
+                     تعداد سوالات: {{report.question_report.count}}
                 </p>
             </div>
             {% endfor %}
