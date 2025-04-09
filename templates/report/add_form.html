@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Sync data Page</title>
     <style>
-        button {
+        #myButton {
             justify-items: center;
             margin-left: 600px;
             margin-top: 250px;
@@ -19,7 +19,7 @@
             font-size: 20px !important; /* افزایش اندازه متن */
             padding: 15px 30px; /* تنظیم فاصله درون دکمه */
         }
-        Button:disabled {
+        #myButton:disabled {
             background-color: #ccc; /* رنگ دکمه وقتی غیرفعال است */
             cursor: not-allowed; /* تغییر نشانگر موس */
         }
@@ -28,7 +28,7 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <button id="myButton" type="button" class="btn btn-primary"  onclick="handleClick()">تایید برای سینک کردن فرم ها</button>
+        <input type="submit" id="myButton" type="button" class="btn btn-primary"  onclick="handleClick()" value="تایید برای سینک کردن فرم ها">
     </form>
 </body>
 
@@ -42,7 +42,7 @@ function handleClick() {
     // اگر 5 دقیقه از آخرین کلیک گذشته باشد
     if (currentTime - lastClickTime >= 300000) { // 300000 میلی‌ثانیه = 5 دقیقه
         alert("5 دقیقه دیگر میتوانید دوباره داده هارا همگام کنید");
-
+        window.location.href = "{% url 'report-list' %}";
         // به روز رسانی زمان آخرین کلیک
         lastClickTime = currentTime;
 

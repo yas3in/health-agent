@@ -18,6 +18,7 @@ class StreamingFile(BytesIO):
         self.name = file.name
 
 
+@login_required
 def report_list_view(request):
     reports = Report.objects.all()
     return render(request, "report/report_front_list.html", {"reports": reports})
@@ -45,4 +46,5 @@ def add_report_to_django(request):
         check = main()
         if check:
             return redirect("admin")
+        raise Exception("error in add report")
         
