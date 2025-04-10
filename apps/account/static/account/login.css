@@ -114,9 +114,60 @@ label {
 }
 
 
-@media screen and (max-width:768) {
-    .form {
-        width: 100px;
-        height: 200px;
+@media only screen and (max-width: 680px) {
+    body {
+      width: 100%;
     }
-}
+    .form {
+        margin-top: 150px;
+        background-color: #252A34;
+        width: 300px;
+        height: 270px;
+
+    }
+    form {
+        padding: 10px 70px;
+        width: 100%;
+    }
+    .login-button {
+        color: #EAEAEA;
+        text-align: center;
+        margin: 20px;
+        padding-bottom: 30px;
+    }
+
+    input {
+        margin-bottom: 10px;
+        height: 20px;
+        width: 150px;
+        border-radius: 10px;
+    }
+    
+    input::placeholder {
+        padding-right: 7px;
+        color: #252A34;
+    }
+
+    label {
+        margin-top: 3px;
+        color: #EAEAEA;
+        margin-bottom: 3px;
+    }
+    
+    #username-label {
+        margin-top: 7px;
+    }
+    
+    /* submit style */
+    
+    #submit {
+        background-color: #3e3f41;
+        color: #EAEAEA;
+        margin-top: 7px;
+    }
+
+    #description {
+        padding-top: 7px;
+    }
+    
+  }

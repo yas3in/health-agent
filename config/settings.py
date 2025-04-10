@@ -66,14 +66,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Local settings import fron local_settings.py
-# DATABASES = LOCAL_DATABASES
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = LOCAL_DATABASES
 
 DEBUG = LOCAL_DEBUG
 
