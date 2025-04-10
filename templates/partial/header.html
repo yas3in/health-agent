@@ -14,7 +14,7 @@
         <ul class="nav-list">
           <li><a href="{% url 'report-list' %}">reports</a></li>
           {% if request.user.is_authenticated %}
-          <li><a id="panels" href="{% url 'user-panel' %}">panels</a></li>
+          <li><a id="panels" href="{% url 'user-panel' %}">my-reports</a></li>
           {% else %}
           <li><a id="panels" href="{% url 'login' %}">login / signup</a></li>
           {% endif %}

@@ -1,5 +1,5 @@
 from time import sleep
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -26,7 +26,11 @@ def report_list_view(request):
 
 @login_required
 def report_detail_view(request, sid):
-    report = Report.objects.get(sid=sid)
+    try:
+        report = Report.objects.get(sid=sid)
+    except:
+        raise Http404
+    
     questions = Question.objects.filter(report=report)
     if request.method == "GET":
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
