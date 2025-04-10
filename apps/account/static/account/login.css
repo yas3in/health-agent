@@ -121,6 +121,9 @@ label {
         width: 400px;
         height: 350px;
     }
+    #form-signup {
+      height: 400px;
+    }
     form {
       padding-right: 120px;
       padding-left: 0;
