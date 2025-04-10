@@ -1,9 +1,7 @@
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
@@ -18,12 +16,12 @@ def login_view(request):
         if user is not None:
             login(request, user)
             if response.endswith('login/'):
-                return redirect('user-panel')
+                return redirect('report-list')
             return HttpResponseRedirect(response)
         return redirect('login')
     else:
         if request.user.is_authenticated:
-            return redirect('user-panel')
+            return redirect('report-list')
     return render(request, "account/login.html")
 
 
@@ -39,12 +37,12 @@ def signup_view(request):
                 user = authenticate(request, username=username, password=password)
                 login(request, user)
                 if response.endswith('signup/'):
-                    return redirect('user-panel')
+                    return redirect('report-list')
                 return HttpResponseRedirect(response)
             return redirect('login')
         return redirect('signup')
     else:
         if request.user.is_authenticated:
-            return redirect('user-panel')
+            return redirect('report-list')
         return render(request, "account/signup.html")
 
