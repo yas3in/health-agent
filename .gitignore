@@ -1,1 +1,10 @@
 *.sqlite3
+
+.env
+
+media
+
+local_*
+
+migrations
+__pycache__
