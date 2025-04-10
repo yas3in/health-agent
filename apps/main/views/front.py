@@ -1,9 +1,5 @@
-from django.shortcuts import render
-
-
-def user_panel(request):
-    return render(request, "main/user_panel.html")
+from django.shortcuts import redirect, render
 
 
 def index_page(request):
-    return render(request, "main/index.html")
+    return redirect("report-list")

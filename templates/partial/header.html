@@ -14,11 +14,10 @@
         <ul class="nav-list">
           <li><a href="{% url 'report-list' %}">reports</a></li>
           {% if request.user.is_authenticated %}
-          <li><a id="panels" href="{% url 'user-panel' %}">my-reports</a></li>
+          <li><a id="panels" href="{% url 'my-reports-list' %}">my-reports</a></li>
           {% else %}
           <li><a id="panels" href="{% url 'login' %}">login / signup</a></li>
           {% endif %}
-          <li><a href="{% url 'index' %}">main page</a></li>
         </ul>
     </nav>
   </div>
