@@ -2,7 +2,6 @@ from time import sleep
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
 
 from apps.report.models import Question, Report
 from apps.report.utils import LimeSurvay, main
@@ -46,17 +45,6 @@ def report_detail_view(request, sid):
                 save_voice = utils.save_voice(voice=audio_file, report=report, user=request.user)
                 return render(request, "report/report_detail.html", {"report": report, "questions": questions, "status": True})
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
-    
-
-@staff_member_required
-def add_report_to_django(request):
-    if request.method == "GET":
-        return render(request, "report/add_form.html") 
-    if request.method == "POST":
-        check = main()
-        if check:
-            return redirect("admin")
-        raise Exception("error in add report")
         
 
 @login_required

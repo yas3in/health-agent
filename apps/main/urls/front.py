@@ -1,8 +1,8 @@
 from django.urls import path
 
-from apps.main.views.front import index_page
+from apps.main.views.front import add_report_to_django
 
 
 urlpatterns = [
-    path("", index_page, name="index")
+    path("", add_report_to_django, name="index")
 ]
