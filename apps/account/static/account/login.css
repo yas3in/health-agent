@@ -114,20 +114,21 @@ label {
 }
 
 
-@media only screen and (max-width: 680px) {
-    body {
-      width: 100%;
-    }
+@media only screen and (max-width: 780px) {
     .form {
         margin-top: 150px;
         background-color: #252A34;
-        width: 300px;
-        height: 270px;
-
+        width: 400px;
+        height: 300px;
     }
     form {
-        padding: 10px 70px;
+      padding-right: 120px;
+      padding-left: 0;
+    }
+    .container {
         width: 100%;
+        justify-items: center;
+    justify-content: center;
     }
     .login-button {
         color: #EAEAEA;
