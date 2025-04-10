@@ -1,3 +1,4 @@
+from io import BytesIO
 import os
 import json
 
@@ -77,7 +78,6 @@ class VoiceProcess:
 
 def save_voice(user, report, voice):
     counts = Voice.objects.filter(user=user).count()
-    print(counts)
     try:
         if counts < 10:
             instance = Voice.objects.create(
