@@ -52,19 +52,36 @@
     text-decoration: solid;
 }
 
-#sendButton , #stopButton, #startButton:disabled {
-    background-color: #EAEAEA;
-    color:  #123458;
+#sendButton{
+    background-color: rgb(126, 226, 176);
+    color: #123458;
 }
 
-#sendButton , #stopButton, #startButton{
+#startButton{
     background-color: #123458;
     color: #EAEAEA;
+}
+
+#stopButton:disabled, #sendButton:disabled, #startButton:disabled{
+    background-color: #EAEAEA;
+    color:  #123458;
+    margin: 0;
+}
+#stopButton{
+    background-color: rgb(126, 203, 226);
+    color: #123458;
+}
+
+button{
     border: 1px #123458 solid;
     border-radius: 10px;
     height: 50px;
-    width: 100px;
+    width: 80px;
     font-size: 20px;
+}
+
+form {
+    width: 300px;
 }
 
 @media (max-width: 950px) {

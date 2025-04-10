@@ -2,6 +2,7 @@ from io import BytesIO
 import os
 import json
 
+from django.shortcuts import redirect
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
@@ -45,11 +46,14 @@ class VoiceProcess:
             base_url=AVALAI_BASE_URL,
             api_key=AVALAI_API_KEY
         )
-        transcription = client.audio.transcriptions.create(
-            model="whisper-1", 
-            file=voice, 
-            response_format="text"
-        )
+        try:
+            transcription = client.audio.transcriptions.create(
+                model="whisper-1", 
+                file=voice, 
+                response_format="text"
+            )
+        except:
+            return None
         return transcription
     
     @classmethod
@@ -65,6 +69,8 @@ class VoiceProcess:
     @classmethod
     def handler(cls, report, voice, user):
         text = cls.voice_process_api(voice)
+        if text is None:
+            return None
     
         question_dict = {}
         report = Report.objects.get(name=report)
