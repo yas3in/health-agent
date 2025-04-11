@@ -138,12 +138,11 @@ body {
     }
 
     .desktop-logo {
-        margin-left: 8px;
-        font-size: 17px;
-        width: auto;
+        margin-left: 12px;
+        font-size: 20px;
     }
     .desktop-logo a {
-        margin-left: 8px;
-        font-size: 17px;    
+        margin-left: 12px;
+        font-size: 20px;    
     }
 } 
