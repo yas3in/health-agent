@@ -1,21 +1,14 @@
-from io import BytesIO
-import os
 import json
 
 from django.shortcuts import redirect
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
-from dotenv import load_dotenv
-
 from apps.report.models import Answer, Question, Report
 from apps.voice_process.models import Voice
 
+from config.local_setting import AVALAI_API_KEY, AVALAI_BASE_URL
 
-load_dotenv()
-
-AVALAI_API_KEY = os.getenv("AVALAI_API_KEY")
-AVALAI_BASE_URL = os.getenv("AVALAI_BASE_URL")
 
 class VoiceProcess:
 

@@ -11,3 +11,4 @@ def add_report_to_django(request):
             if check:
                 return redirect("report-list")
             raise Exception("error in add report")
+    return redirect("report-list")

@@ -1,14 +1,12 @@
-from time import sleep
-from django.http import Http404, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import Http404
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from apps.report.models import Question, Report
-from apps.report.utils import LimeSurvay, main
+from apps.report.utils import main
 from apps.voice_process import utils
 
 from io import BytesIO
-import json
 
 
 class StreamingFile(BytesIO):
