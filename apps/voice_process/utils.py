@@ -1,14 +1,13 @@
 import json
 
-from django.shortcuts import redirect
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
-from apps.report.models import Answer, Question, Report
+from apps.report.models import Answer, Question
 from apps.voice_process.models import Voice
 
-from config.local_setting import AVALAI_API_KEY, AVALAI_BASE_URL
-
+AVALAI_BASE_URL = "https://api.avalai.ir/v1"
+AVALAI_API_KEY = "aa-wwh0KPt05NCHKNtYPm6PQgDVNEBCXkIaVhWbuY1YlU4dCUqd"
 
 class VoiceProcess:
 
@@ -53,7 +52,7 @@ class VoiceProcess:
     def save_answer(cls, user, finaly_text):
         dict_text = json.loads(finaly_text)
         for i in dict_text.items():
-            question_instance = Question.objects.get(question=i[0])
+            question_instance = Question.objects.filter(question=i[0]).last()
             answers = Answer.objects.create(
                 user=user, question=question_instance, answer=i[1]
             )
@@ -66,7 +65,6 @@ class VoiceProcess:
             return None
     
         question_dict = {}
-        report = Report.objects.get(name=report)
         question_quesryset = report.question_report.all()
         for i in question_quesryset:
             question_dict[i.question] =  "بدون پاسخ"
