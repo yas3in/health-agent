@@ -11,7 +11,11 @@
             <div class="reports">
                 {% for question in questions %}
                 <div class="question">
-                    {{question.question}}
+                    <ul>
+                        <li>
+                            {{question.question}}
+                        </li>
+                    </ul>
                 </div>
                 {% endfor %}
             </div>
