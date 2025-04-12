@@ -127,3 +127,6 @@ LOGIN_REDIRECT_URL = 'report-list'
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  
+
+
+handler404 = 'yourapp.views.custom_page_not_found'
