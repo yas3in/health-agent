@@ -8,14 +8,6 @@
     
     <div class="container">
         <div class="datas">
-            {% if messages %}
-            <ul class="w3-panel w3-green">
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            <div class="reports">
                 {% for question in questions %}
                 <div class="question">
                     <ul>
