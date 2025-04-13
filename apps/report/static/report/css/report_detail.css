@@ -65,7 +65,7 @@
 #stopButton:disabled, #sendButton:disabled, #startButton:disabled{
     background-color: #EAEAEA;
     color:  #123458;
-    margin: 0;
+    margin: 10px;
 }
 #stopButton{
     background-color: rgb(126, 203, 226);
@@ -82,6 +82,14 @@ button{
 
 form {
     width: 300px;
+}
+
+.voice-button {
+    width: 400px;
+}
+
+#audioFileInput {
+    width: auto;
 }
 
 @media (max-width: 950px) {
