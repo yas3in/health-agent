@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-from .local_setting import *
+try:
+    from .local_setting import *
+except ImportError:
+    pass
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,7 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'report-list'
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-
-handler404 = 'yourapp.views.custom_page_not_found'
