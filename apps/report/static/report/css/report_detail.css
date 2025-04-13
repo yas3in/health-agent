@@ -84,13 +84,6 @@ form {
     width: 300px;
 }
 
-.voice-button {
-    width: 400px;
-}
-
-#audioFileInput {
-    width: auto;
-}
 
 @media (max-width: 950px) {
 	.question {
