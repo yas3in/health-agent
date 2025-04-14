@@ -6,8 +6,8 @@ from openai import OpenAI
 from apps.report.models import Answer, Question
 from apps.voice_process.models import Voice
 
-AVALAI_BASE_URL = "https://api.avalai.ir/v1"
-AVALAI_API_KEY = "aa-wwh0KPt05NCHKNtYPm6PQgDVNEBCXkIaVhWbuY1YlU4dCUqd"
+AVALAI_BASE_URL = "https://api.avalapis.ir/v1"
+AVALAI_API_KEY = "aa-jTQuoFCLBel2Wffo3ojPLmIK4t3wwXJxgfnxLHuQrkbrIuE0"
 
 class VoiceProcess:
 

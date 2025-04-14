@@ -46,9 +46,5 @@ def report_detail_view(request, sid):
 
 @login_required
 def my_reports_list(request):
-    return render(request, "report/my_reports_list.html")
-
-
-@login_required
-def my_reports_detail(request):
-    return render(request, "report/my_reports_detail.html")
+    reports = Report.objects.filter(user=request.user)
+    return render(request, "report/my_reports_list.html", {"reports": reports})
