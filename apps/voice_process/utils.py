@@ -44,8 +44,8 @@ class VoiceProcess:
                 file=voice, 
                 response_format="text"
             )
-        except:
-            return None
+        except Exception as e:
+            raise e
         return transcription
     
     @classmethod

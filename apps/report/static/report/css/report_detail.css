@@ -10,7 +10,7 @@
     margin-right: 320px;
     margin-left: 320px;
     direction: rtl;
-    margin-bottom: 50px;
+    margin-bottom: 190px;
     flex-wrap: wrap;
 }
 
@@ -83,8 +83,6 @@ button{
 form {
     width: 300px;
 }
-
-
 @media (max-width: 950px) {
 	.question {
         font-size: 20px;
