@@ -7,6 +7,5 @@ from apps.report.views.front import (
 urlpatterns = [
     path("", report_list_view, name="report-list"),
     path("<int:sid>/", report_detail_view, name="report-detail"),
-    path("my-reports-list/", my_reports_list, name="my-reports-list"), 
-    path("my-reports-detail/", my_reports_detail, name="my-reports-detail"), 
+    path("my-reports-list/", my_reports_list, name="my-reports-list"),
 ]
