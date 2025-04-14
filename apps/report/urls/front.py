@@ -1,8 +1,7 @@
 from django.urls import path
 
 from apps.report.views.front import (
-    report_detail_view, report_list_view,
-    my_reports_list, my_reports_detail
+    report_detail_view, report_list_view, my_reports_list
 )
 
 urlpatterns = [
