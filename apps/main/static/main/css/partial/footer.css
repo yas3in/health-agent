@@ -1,9 +1,3 @@
-/* ارتفاع کل صفحه را به 100% تنظیم کنید */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
 
 /* wrapper باید ارتفاع کل صفحه را پوشش دهد */
 .wrapper {
@@ -18,15 +12,26 @@ main {
 }
 
 /* استایل فوتر */
-footer {
+/* footer {
     position: static;
     bottom: 0;
+    width: 100%;
+    padding: 10px;
+    
+} */
+
+footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
     width: 100%;
     background-color: #fde7e7;
     color: #858585;
     text-align: center;
-    padding: 10px;
-}
+    margin: auto;
+    height: 50px;
+    padding-top: 15px;
+  }
 
 footer a {
     text-decoration: none;
@@ -35,4 +40,19 @@ footer a {
     color: #ffffff;
     font-size: 15px;
     padding: 4px;
+}
+
+#version {
+    padding-right: 20px;
+    float: right;
+    font-size: 17px;
+}
+
+@media (max-width: 950px) {
+    footer {
+        position: fixed;
+        height: 30px;
+        padding-top: 7px;
+      }
+    
 }

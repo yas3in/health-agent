@@ -4,6 +4,13 @@
     text-decoration: none;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
 .datas {
     margin-top: 100px;
     width: 100%;
@@ -76,7 +83,7 @@ button{
     border: 1px #123458 solid;
     border-radius: 10px;
     height: 50px;
-    width: 80px;
+    width: 90px;
     font-size: 20px;
 }
 
@@ -100,5 +107,12 @@ form {
         margin-left: 50px;
         margin-bottom: 50px;
         flex-direction: column; /* مربع‌ها زیر هم قرار می‌گیرند */ 
+    }
+    button{
+        border: 1px #123458 solid;
+        border-radius: 10px;
+        height: 45px;
+        width: 90px;
+        font-size: 16px;
     }
 }
