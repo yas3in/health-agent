@@ -1,6 +1,7 @@
 import requests
 
 from apps.report.models import Question, Report
+import jdatetime
 
 LIMESURVEY_PASSWORD = "Voice@Admin"
 LIMESURVEY_USERNAME = "Voice@Admin"
@@ -36,8 +37,9 @@ def save_report(name, sid, description=""):
     try:
         Report.objects.get(sid=sid)
     except:
+        time = jdatetime.date.today()
         instance = Report.objects.create(
-            name=name, sid=sid, description=description
+            name=name, sid=sid, description=description, created_time=time
         )
         instance.save()
         return instance

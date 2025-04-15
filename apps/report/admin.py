@@ -5,7 +5,7 @@ from .models import Answer, Question, Report
 
 @register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ("user", "question", "answer")
+    list_display = ("user", "question", "answer", "created_time")
 
 
 @register(Question)
