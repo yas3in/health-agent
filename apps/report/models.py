@@ -25,7 +25,7 @@ class Answer(models.Model):
     user = models.ForeignKey(User, related_name="answer_user", on_delete=models.CASCADE)
     question = models.ForeignKey(Question, related_name="answer_question", on_delete=models.CASCADE)
     answer = models.TextField()
-    created_time = jmodels.jDateTimeField(auto_now_add=True)
+    created_time = jmodels.jDateField()
     
     def __str__(self):
         return f"{self.question} - {self.answer}"

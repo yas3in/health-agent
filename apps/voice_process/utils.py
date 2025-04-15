@@ -1,5 +1,6 @@
 import json
 
+import jdatetime
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
@@ -54,7 +55,7 @@ class VoiceProcess:
         for i in dict_text.items():
             question_instance = Question.objects.filter(question=i[0]).last()
             answers = Answer.objects.create(
-                user=user, question=question_instance, answer=i[1]
+                user=user, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
             )
         return True
             
