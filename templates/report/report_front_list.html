@@ -19,18 +19,24 @@
                             <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
                         </h2>
                     </div>
-                    <div class="col-3 col-md-2">
+                    <div class="col-4 col-md-2">
                         <p class="p-style time-style">{{report.created_time}}</p>
                     </div>   
                     <div class="col-1"></div>
                 </div>
                 <div class="row">
                     <div class="col-1"></div>
-                    <div class="col">
+                    <div class="col-6 col-md-8">
                         <p class="count-question">
                             تعداد سوالات: {{report.question_report.count}}
                         </p>
                     </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-info button-detail lalezar text-color-tireh">
+                            <a href="{% url "report-detail" report.sid %}">مشاهده گزارش</a>
+                        </button>
+                    </div>
+                    <div class="col"></div>
                 </div>
             </div>
             <div class="col"></div>
