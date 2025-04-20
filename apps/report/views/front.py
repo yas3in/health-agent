@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from apps.report.models import Question, Report
+from apps.report.models import Answer, Question, Report
 from apps.voice_process import utils
 
 from io import BytesIO
@@ -46,5 +46,8 @@ def report_detail_view(request, sid):
 
 @login_required
 def my_reports_list(request):
-    reports = Report.objects.filter(user=request.user)
-    return render(request, "report/my_reports_list.html", {"reports": reports})
+    # reports = Report.objects.filter(
+    # question_report__answer_question__user=request.user
+    # ).distinct()
+    answers = Answer.objects.filter(user=request.user).distinct()
+    return render(request, "report/my_reports_list.html", {"answers":answers})
