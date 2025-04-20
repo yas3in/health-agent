@@ -1,5 +1,6 @@
 import json
 
+import jdatetime
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
@@ -7,7 +8,7 @@ from apps.report.models import Answer, Question
 from apps.voice_process.models import Voice
 
 AVALAI_BASE_URL = "https://api.avalai.ir/v1"
-AVALAI_API_KEY = "aa-wwh0KPt05NCHKNtYPm6PQgDVNEBCXkIaVhWbuY1YlU4dCUqd"
+AVALAI_API_KEY = "aa-jTQuoFCLBel2Wffo3ojPLmIK4t3wwXJxgfnxLHuQrkbrIuE0"
 
 class VoiceProcess:
 
@@ -44,8 +45,8 @@ class VoiceProcess:
                 file=voice, 
                 response_format="text"
             )
-        except:
-            return None
+        except Exception as e:
+            raise e
         return transcription
     
     @classmethod
@@ -54,7 +55,7 @@ class VoiceProcess:
         for i in dict_text.items():
             question_instance = Question.objects.filter(question=i[0]).last()
             answers = Answer.objects.create(
-                user=user, question=question_instance, answer=i[1]
+                user=user, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
             )
         return True
             

@@ -1,26 +1,24 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'main/css/404.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/404.css' %}" type="text/css">
     <title>گزارشنامه | data voice</title>
-    </head>
+  </head>
 <body>
-    <div class="wrapper">
-        <div class="text_group">
-          <p class="text_404">404</p>
-          <p class="text_lost" dir="rtl">متاسفانه این صفحه در دسترس نیست<br />به زودی برمیگردیم.</p>
-          <p class="text-lost" dir="rtl"> <a href="{% url 'reports' %}" style="text-decoration: none; color: rgb(1, 4, 87);"> رفتن به صفحه اصلی</a></p>
-        </div>
-        <div class="window_group">
-          <div class="window_404">
-            <div class="stars"></div>
-          </div>
-        </div>
+  <div class="wrapper">
+    <div class="text_group">
+      <p class="text_404">404</p>
+      <p class="text_lost" dir="rtl">متاسفانه این صفحه در دسترس نیست<br />به زودی برمیگردیم.</p>
+      <p class="text-lost" dir="rtl"> <a href="{% url 'report-list' %}" style="text-decoration: none; color: rgb(1, 4, 87);"> رفتن به صفحه اصلی</a></p>
+    </div>
+    <div class="window_group">
+      <div class="window_404">
+        <div class="stars"></div>
       </div>
-      <script src="{% static 'main/js/404.js' %}"></script>
+    </div>
+  </div>
+  <script src="{% static 'main/js/404.js' %}"></script>
 </body>
 </html>

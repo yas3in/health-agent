@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 
 from config import settings
 
+handler404 = 'apps.main.views.admin.custom_page_not_found'
+handler500 = 'apps.main.views.admin.custom_page_server_error'
 
 admin_urls = [
 ]

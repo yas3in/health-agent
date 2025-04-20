@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_jalali.db import models as jmodels
 
 
 class Report(models.Model):
     sid = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=480)
     description = models.TextField(blank=True)
-    created_time = models.TimeField(auto_now_add=True)
+    created_time = jmodels.jDateField()
 
     def __str__(self):
         return self.name
@@ -24,6 +25,7 @@ class Answer(models.Model):
     user = models.ForeignKey(User, related_name="answer_user", on_delete=models.CASCADE)
     question = models.ForeignKey(Question, related_name="answer_question", on_delete=models.CASCADE)
     answer = models.TextField()
+    created_time = jmodels.jDateField()
     
     def __str__(self):
         return f"{self.question} - {self.answer}"

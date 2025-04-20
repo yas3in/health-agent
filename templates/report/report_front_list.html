@@ -6,18 +6,41 @@
 {% block style %} {% static 'report/css/report_list.css' %} {% endblock style %}
 
 {% block content %}
-    <div class="container">
-        <div class="datas">
-            {% for report in reports %}
-            <div class="reports">
-                <h2>
-                    <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
-                </h2>
-                <p>
-                     تعداد سوالات: {{report.question_report.count}}
-                </p>
+    <div class="container-sm">
+        {% for report in reports %}
+        <div class="row datas">
+            <div class="col"></div>
+            <div class="col-10 reports">
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <h2>
+                            <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
+                        </h2>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <p class="p-style time-style">{{report.created_time}}</p>
+                    </div>   
+                    <div class="col-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-6 col-md-8">
+                        <p class="count-question">
+                            تعداد سوالات: {{report.question_report.count}}
+                        </p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-info button-detail lalezar text-color-tireh">
+                            <a href="{% url "report-detail" report.sid %}">مشاهده گزارش</a>
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                </div>
             </div>
-            {% endfor %}
+            <div class="col"></div>
         </div>
+        {% endfor %}
     </div>
 {% endblock content %}

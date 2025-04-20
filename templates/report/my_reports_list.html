@@ -1,23 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page-title %} report list {% endblock page-title %}
+{% block page-title %} my reports {% endblock page-title %}
 
-{% block style %} {% static 'report/css/report_list.css' %} {% endblock style %}
+{% block style %} {% static 'report/css/my_report_list.css' %} {% endblock style %}
 
 {% block content %}
-    <div class="container">
-        <div class="datas">
-            {% for report in reports %}
-            <div class="reports">
-                <h2>
-                    <a href="{% url "report-detail" report.sid %}">{{report.name}}</a>
-                </h2>
-                <p>
-                    {{report.description}}
-                </p>
+    <div class="container-sm">
+        {% for answer in answers %}
+        {% for report in reports %}
+        <div class="row datas">
+            <div class="col"></div>
+            <div class="col-10 reports">
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <h2>
+                            {{report.name}}
+                        </h2>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <p class="p-style time-style">پاسخ در: {{answer.created_time}}</p>
+                    </div>   
+                    <div class="col-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-6 col-md-8">
+                        <p class="count-question">
+                           تعداد سوالات: {{report.question_report.count}}
+                        </p>
+                    </div>
+                    <div class="col">
+                        <label class="label">
+                            پاسخ داده شده
+                        </label>
+                    </div>
+                    <div class="col"></div>
+                </div>
             </div>
-            {% endfor %}
+            <div class="col"></div>
         </div>
+            {% endfor %}
+        {% endfor %}
     </div>
 {% endblock content %}

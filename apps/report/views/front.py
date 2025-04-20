@@ -2,10 +2,11 @@ from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from apps.report.models import Question, Report
+from apps.report.models import Answer, Question, Report
 from apps.voice_process import utils
 
 from io import BytesIO
+from django.contrib import messages
 
 
 class StreamingFile(BytesIO):
@@ -24,7 +25,7 @@ def report_list_view(request):
 def report_detail_view(request, sid):
     try:
         report = Report.objects.get(sid=sid)
-    except:
+    except Report.DoesNotExist:
         raise Http404
     
     questions = Question.objects.filter(report=report)
@@ -36,18 +37,17 @@ def report_detail_view(request, sid):
             in_memory_file = StreamingFile(audio_file)
             voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
             if voice_process is None:
-                return render(request, "report/report_detail.html", {"report": report, "questions": questions, "status": False})
+                return render(request, "report/report_detail.html", {"report": report, "questions": questions})
             else:
                 save_voice = utils.save_voice(voice=audio_file, report=report, user=request.user)
-                return render(request, "report/report_detail.html", {"report": report, "questions": questions, "status": True})
+                return render(request, "report/report_detail.html", {"report": report, "questions": questions})
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
         
 
 @login_required
 def my_reports_list(request):
-    return render(request, "report/my_reports_list.html")
-
-
-@login_required
-def my_reports_detail(request):
-    return render(request, "report/my_reports_detail.html")
+    # reports = Report.objects.filter(
+    # question_report__answer_question__user=request.user
+    # ).distinct()
+    answers = Answer.objects.filter(user=request.user).distinct()
+    return render(request, "report/my_reports_list.html", {"answers":answers})

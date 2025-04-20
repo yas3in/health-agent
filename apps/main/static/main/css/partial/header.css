@@ -1,4 +1,4 @@
-.logo {
+/* .logo {
     display: none;
 }
 
@@ -100,7 +100,8 @@ body {
 }
 
 /* استایل برای موبایل */
-@media (max-width: 950px) {
+
+/* @media (max-width: 950px) {
     .nav-list {
         display: none;
         flex-direction: row-reverse;
@@ -109,7 +110,7 @@ body {
         border: 1px solid #123458;
         color: #000000;
         position: absolute;
-        top: 100px; /* ارتفاع navbar */
+        top: 100px; /* ارتفاع navbar
         left: 0;
     }
 
@@ -146,4 +147,33 @@ body {
         margin-left: 8px;
         font-size: 17px;    
     }
-} 
+}  */
+
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Special+Gothic+Condensed+One&display=swap');
+
+.lalezar {
+    font-family: "Lalezar", system-ui;
+}
+
+.bold-font {
+    font-family:'Times New Roman', serif
+}
+
+.bg-header {
+    background-color: #BDDDE4;
+}
+
+.bg-body {
+    background-color: #FFF1D5;
+}
+
+.icon-color {
+    color: #FFF1D5;
+}
+
+header {
+    margin-bottom: 100px;
+}

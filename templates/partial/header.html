@@ -1,25 +1,40 @@
 {% load static %}
 
 <header>
-<div class="header">
-    <nav class="navbar fixed-top">
-      <div class="desktop-logo">
-        <a href="{% url 'index' %}" class="desktop">DataVoice</a>
+    <!-- Start Navbar section -->
+    <nav class="bg-header navbar fixed-top navbar-expand-md">
+      <div class="container">
+        <a class="navbar-brand fs-3 bold-font" href="{% url 'report-list' %}">DataVoice</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end bg-header" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title bold-font" id="offcanvasNavbarLabel">DataVoice</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <hr class="dropdown-dividar">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active text-black fs-5 bold-font" aria-current="page" href="{% url 'report-list' %}">
+                 <i class="bi bi-list-columns-reverse d-md-none d-inline">
+                </i> 
+                reports
+                </a>               
+              </li>
+              <hr class="dropdown-dividar d-md-none">
+              <li class="nav-item">
+                <a class="nav-link active text-black fs-5 bold-font" href="{% url 'my-reports-list' %}">
+                  <i class="bi bi-list-check d-md-none d-inline"></i>
+                  my-reports
+                </a>
+              </li>
+            </ul>
+            <hr class="dropdown-dividar">
+          </div>
+        </div>
       </div>
-      <div class="menu-toggle" id="mobile-menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-      </div>
-        <ul class="nav-list">
-          <li><a href="{% url 'report-list' %}">reports</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a id="panels" href="{% url 'my-reports-list' %}">my-reports</a></li>
-          {% else %}
-          <li><a id="panels" href="{% url 'login' %}">login / signup</a></li>
-          {% endif %}
-        </ul>
-    </nav>
-  </div>
+  <!-- End Navbar section -->
   <script src="{% static 'main/js/script.js' %}"></script>
 </header>
