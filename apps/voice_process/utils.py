@@ -4,7 +4,7 @@ import jdatetime
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
-from apps.report.models import Answer, Question
+from apps.report.models import Answer, Question, Response
 from apps.voice_process.models import Voice
 
 AVALAI_BASE_URL = "https://api.avalai.ir/v1"
@@ -35,6 +35,7 @@ class VoiceProcess:
     
     @staticmethod
     def voice_process_api(voice):
+        print(voice)
         client = OpenAI(
             base_url=AVALAI_BASE_URL,
             api_key=AVALAI_API_KEY
@@ -50,15 +51,23 @@ class VoiceProcess:
         return transcription
     
     @classmethod
-    def save_answer(cls, user, finaly_text):
+    def save_answer(cls, response, finaly_text):
         dict_text = json.loads(finaly_text)
         for i in dict_text.items():
             question_instance = Question.objects.filter(question=i[0]).last()
             answers = Answer.objects.create(
-                user=user, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
+                response=response, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
             )
         return True
-            
+
+    @classmethod
+    def create_response(cls, report, user):
+        time = jdatetime.date.today()
+        instance = Response.objects.create(
+            report=report, user=user, created_time=time
+        )
+        return instance
+
     @classmethod
     def handler(cls, report, voice, user):
         text = cls.voice_process_api(voice)
@@ -69,13 +78,15 @@ class VoiceProcess:
         question_quesryset = report.question_report.all()
         for i in question_quesryset:
             question_dict[i.question] =  "بدون پاسخ"
+        
+        response_instance = VoiceProcess.create_response(report, user)
         finaly_text = cls.chat_completions_api(text, question_dict)
-        svae_answer = cls.save_answer(user, finaly_text)
+        svae_answer = cls.save_answer(response_instance, finaly_text)
         return True
 
 
 def save_voice(user, report, voice):
-    counts = Voice.objects.filter(user=user).count()
+    counts = Voice.objects.filter(response__user=user).count()
     try:
         if counts < 10:
             instance = Voice.objects.create(

@@ -21,18 +21,20 @@ class Question(models.Model):
         return f"{self.report} - {self.question}"
 
 
+class Response(models.Model):
+    report = models.ForeignKey(Report, related_name="response_report", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="response_user", on_delete=models.CASCADE)
+    created_time = jmodels.jDateField()
+
+    def __str__(self):
+        return f'{self.user} - response: {self.id}'
+
+
 class Answer(models.Model):
-    user = models.ForeignKey(User, related_name="answer_user", on_delete=models.CASCADE)
+    response = models.ForeignKey(Response, related_name="answer_response", on_delete=models.CASCADE)
     question = models.ForeignKey(Question, related_name="answer_question", on_delete=models.CASCADE)
     answer = models.TextField()
     created_time = jmodels.jDateField()
     
     def __str__(self):
         return f"{self.question} - {self.answer}"
-
-
-
-class Response(models.Model):
-    report = models.ForeignKey(Report, related_name="response", on_delete=models.CASCADE)
-    quser = models.ForeignKey(User, related_name="response_user", on_delete=models.CASCADE)
-    created_time = models.DateTimeField()

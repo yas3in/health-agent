@@ -6,4 +6,4 @@ from apps.voice_process.models import Voice
 
 @register(Voice)
 class VoiceAdmin(admin.ModelAdmin):
-    list_display = ("user", "report", "audio_file")
+    list_display = ("response", "audio_file")
