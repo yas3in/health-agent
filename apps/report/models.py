@@ -27,3 +27,10 @@ class Answer(models.Model):
     
     def __str__(self):
         return f"{self.question} - {self.answer}"
+
+
+
+class Response(models.Model):
+    report = models.ForeignKey(Report, related_name="response", on_delete=models.CASCADE)
+    quser = models.ForeignKey(User, related_name="response_user", on_delete=models.CASCADE)
+    created_time = models.DateTimeField()
