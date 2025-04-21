@@ -35,19 +35,18 @@ def report_detail_view(request, sid):
         audio_file = request.FILES["audio_file"]
         if audio_file:
             in_memory_file = StreamingFile(audio_file)
-            voice_process = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
-            if voice_process is None:
+            response = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
+            if response is None:
                 return render(request, "report/report_detail.html", {"report": report, "questions": questions})
             else:
-                save_voice = utils.save_voice(voice=audio_file, report=report, user=request.user)
+                save_voice = utils.save_voice(user=request.user, voice=audio_file, response=response)
                 return render(request, "report/report_detail.html", {"report": report, "questions": questions})
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
         
 
 @login_required
 def my_reports_list(request):
-    # reports = Report.objects.filter(
-    # question_report__answer_question__user=request.user
-    # ).distinct()
-    answers = Answer.objects.filter(user=request.user).distinct()
-    return render(request, "report/my_reports_list.html", {"answers":answers})
+    reports = Report.objects.filter(
+    question_report__answer_question__user=request.user
+    ).distinct()
+    return render(request, "report/my_reports_list.html", {"reports": reports})

@@ -35,7 +35,6 @@ class VoiceProcess:
     
     @staticmethod
     def voice_process_api(voice):
-        print(voice)
         client = OpenAI(
             base_url=AVALAI_BASE_URL,
             api_key=AVALAI_API_KEY
@@ -47,7 +46,7 @@ class VoiceProcess:
                 response_format="text"
             )
         except Exception as e:
-            raise e
+            return None
         return transcription
     
     @classmethod
@@ -59,17 +58,18 @@ class VoiceProcess:
                 response=response, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
             )
         return True
-
+            
     @classmethod
     def create_response(cls, report, user):
         time = jdatetime.date.today()
         instance = Response.objects.create(
-            report=report, user=user, created_time=time
+            report=report, user=user, created_time=time 
         )
         return instance
 
     @classmethod
     def handler(cls, report, voice, user):
+        response = cls.create_response(report, user)
         text = cls.voice_process_api(voice)
         if text is None:
             return None
@@ -78,20 +78,22 @@ class VoiceProcess:
         question_quesryset = report.question_report.all()
         for i in question_quesryset:
             question_dict[i.question] =  "بدون پاسخ"
-        
-        response_instance = VoiceProcess.create_response(report, user)
+            
         finaly_text = cls.chat_completions_api(text, question_dict)
-        svae_answer = cls.save_answer(response_instance, finaly_text)
-        return True
+        save_answer = cls.save_answer(response, finaly_text)
+        if save_answer:
+            return response
+        else:
+            return None
 
 
-def save_voice(user, report, voice):
+def save_voice(user, response, voice):
     counts = Voice.objects.filter(response__user=user).count()
     try:
         if counts < 10:
             instance = Voice.objects.create(
-                user=user, report=report, audio_file=voice
+                response=response, audio_file=voice
             )
             return instance
-    except Exception as e:
-        raise e
+    except:
+        return False
