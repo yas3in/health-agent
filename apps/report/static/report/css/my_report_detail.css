@@ -89,6 +89,10 @@ form {
     text-align: center;
 }
 
+.answer {
+    background-color: #FFF1D5;
+}
+
 @media (max-width: 950px) {
 	.question {
         font-size: 20px;

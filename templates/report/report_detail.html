@@ -6,33 +6,43 @@
 {% block style %} {% static 'report/css/report_detail.css' %} {% endblock style %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-sm">
         <div class="datas">
-            <div class="reports">
-                {% for question in questions %}
-                <div class="question">
-                    <ul>
-                        <li>
-                            {{question.question}}
-                        </li>
-                    </ul>
-                </div>
-                {% endfor %}
-            </div>
             <div class="voice-button">
                 <!-- دکمه های ضبط -->
-                 <form action="" method="post" enctype="multipart/form-data">
+                 <form class="row" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <button type="button" id="startButton">شروع ضبط</button>
-                    <button type="button" id="stopButton" disabled>توقف ضبط</button>
-                    <audio id="audioPlayer" controls></audio>
-        
-                    <!-- مخفی کردن input برای ارسال فایل -->
-                    <input type="file" id="audioFileInput" name="audio_file" style="display:none;">
-                    <!-- دکمه ارسال فایل -->
-                    <button type="submit" id="sendButton" class="buttons" disabled>ارسال پاسخ</button>
+                        <button class="col-2" type="button" id="startButton">شروع ضبط</button>
+                        <div class="col-1 col-md-2"></div>
+                        <audio class="col-6 col-md-4" id="audioPlayer" controls></audio>
+                        <div class="col-1 col-md-2"></div>
+                        <button class="col-2" type="button" id="stopButton" disabled>توقف ضبط</button>
                 </form>
             </div>
+            <hr class="dropdown-divider"/>
+            <div class="row">
+                <p class="col q-list gy-3">
+                    Question's List
+                </p>
+            </div>
+            <div class="row">
+                <div class="reports col">
+                    {% for question in questions %}
+                    <div class="question">
+                        <ul>
+                            <li>
+                                {{question.question}}
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <form class="row" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button type="submit" id="sendButton" class="buttons col" disabled>ارسال پاسخ</button>
+                <input type="file" id="audioFileInput" name="audio_file" style="display:none;">
+            </form>
         </div>
     </div>
     <script>

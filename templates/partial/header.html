@@ -4,13 +4,15 @@
     <!-- Start Navbar section -->
     <nav class="bg-header navbar fixed-top navbar-expand-md">
       <div class="container">
-        <a class="navbar-brand fs-3 bold-font" href="{% url 'report-list' %}">DataVoice</a>
+        <a class="navbar-brand fs-3 bold-font" href="{% url 'report-list' %}">
+          <img src="{% static 'main/image/new_logo.png' %}" alt="" class="d-inline-block align-text-top" width="100" height="40">
+          VoiceData</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end bg-header" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title bold-font" id="offcanvasNavbarLabel">DataVoice</h5>
+            <h5 class="offcanvas-title bold-font" id="offcanvasNavbarLabel">VoiceData</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">

@@ -2,15 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Special+Gothic+Condensed+One&display=swap');
 
-.lalezar {
-    font-family: "Lalezar", system-ui;
-}
-
 @font-face {
     font-family: iran-sans;
     src: url(../fonts/sans/773bba0f218e4740e1ce2e37ebc80ef3c29917152901931.otf);
     src: url(../fonts/sans/773bba0f218e4740e1ce2e37ebc80ef3c29917152901931.ttf);
   }
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "lalezar";
+}
+
+.lalezar {
+    font-family: "Lalezar", system-ui;
+}
 
 .bold-font {
     font-family:'Times New Roman', serif
@@ -22,11 +28,6 @@
 
 .text-color-tireh {
     color: #123458;
-}
-
-* {
-    margin: 0;
-    padding: 0;
 }
 
 a {
@@ -69,7 +70,7 @@ a {
 }
 
 .p-style {
-    font-size: 15px;
+    font-size: 12px;
     font-family: sans-serif;
     color: #123458;
 }
@@ -89,6 +90,9 @@ a {
     margin-top: 5px;
 }
 
+.q-list {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 @media (max-width: 950px) {
     .datas {
