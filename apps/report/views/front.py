@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from apps.report.models import Answer, Question, Report, Response
@@ -40,7 +40,7 @@ def report_detail_view(request, sid):
                 return render(request, "report/report_detail.html", {"report": report, "questions": questions})
             else:
                 save_voice = utils.save_voice(user=request.user, voice=audio_file, response=response)
-                return render(request, "report/report_detail.html", {"report": report, "questions": questions})
+                return redirect("my-report-detail", id=response.id)
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
         
 

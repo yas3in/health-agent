@@ -8,24 +8,33 @@
 {% block content %}
     <div class="container-sm">
         <div class="datas">
+            <p class="fs-4 fw-bold gy-3 text-center">
+                سوالات و پاسخ های شما به این گزارش
+            </p>
             <div class="row">
                 <div class="reports col">
-                    <p class="col q-list">
-                        سوالات و پاسخ های شما به این گزارش
-                    </p>
                     {% for response in responses %}
                     <div class="question">
-                        <ul>
-                            <li>
-                                <p>{{response.question.question}}</p>
-                                <p class="answer">{{response.answer}}</p>
-                                <hr>
-                            </li>
-                        </ul>
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title fw-bold">{{response.question.question}}</h5>
+                              <p class="card-text">{{response.answer}}</p>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
              </div>
+             <div class="d-flex justify-content-between mb-3">
+                <div class="">
+                    <form action="" method="post">
+                        <button type="submit" class="btn btn-danger" value="{{response.id}}">حذف پاسخ</button>
+                    </form>
+                </div>
+                <div class="">
+                    <a href="{% url "report-list" %}"><button type="button" class="btn btn-primary">برگشت</button></a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}
