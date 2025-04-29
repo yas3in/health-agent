@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.views.decorators.http import require_POST
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
@@ -58,4 +59,20 @@ def my_report_detail(request, id):
         return Http404
     else:
         responses = Answer.objects.filter(response=response)
-        return render(request, "report/my_report_detail.html", {"responses": responses})
+        return render(request, "report/my_report_detail.html", {"responses": responses, "id": response})
+
+
+@require_POST
+@login_required
+def delete_response(request):
+    response = request.POST.get('id', None)
+    if response is not None:
+        try:
+            instance = Response.objects.get(id=response)
+        except:
+            return Http404
+        else:
+            instance.delete()
+            return redirect("my-reports-list")
+    else:
+        return Http404

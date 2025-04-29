@@ -6,6 +6,9 @@
 {% block style %} {% static 'report/css/my_report_detail.css' %} {% endblock style %}
 
 {% block content %}
+    <!-- start model -->
+
+    <!-- end modal -->
     <div class="container-sm">
         <div class="datas">
             <p class="fs-4 fw-bold gy-3 text-center">
@@ -25,16 +28,41 @@
                     {% endfor %}
                 </div>
              </div>
+             <!-- start buttons -->
              <div class="d-flex justify-content-between mb-3">
                 <div class="">
-                    <form action="" method="post">
-                        <button type="submit" class="btn btn-danger" value="{{response.id}}">حذف پاسخ</button>
-                    </form>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        حذف پاسخ
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div dir="rtl" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button dir="ltr" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">حذف پاسخ</h1>
+                            </div>
+                            <div class="modal-body">
+                                این کار برگشت ندارد، مطمعن هستید؟
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">برگشت</button>
+                            <form action="{% url "delete-response" %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" name="id" value="{{id.id}}">بله</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="">
                     <a href="{% url "report-list" %}"><button type="button" class="btn btn-primary">برگشت</button></a>
                 </div>
             </div>
+            <!-- end buttons -->
         </div>
     </div>
 {% endblock content %}
