@@ -1,35 +1,44 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Sync data Page</title>
-    <style>
-        #myButton {
-            justify-items: center;
-            margin-left: 600px;
-            margin-top: 250px;
-            width: 300px; /* تنظیم عرض دکمه */
-            height: 60px; /* تنظیم ارتفاع دکمه */
-            font-size: 20px !important; /* افزایش اندازه متن */
-            padding: 15px 30px; /* تنظیم فاصله درون دکمه */
-        }
-        #myButton:disabled {
-            background-color: #ccc; /* رنگ دکمه وقتی غیرفعال است */
-            cursor: not-allowed; /* تغییر نشانگر موس */
-        }
-    </style>
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <input name="button" type="submit" id="myButton" type="button" class="btn btn-primary"  onclick="handleClick()" value="تایید برای سینک کردن فرم ها">
-    </form>
-</body>
+{% block page-title %} report detail {% endblock page-title %}
 
-</html>
+{% block style %} {% static 'report/css/my_report_detail.css' %} {% endblock style %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 d-flex" dir="rtl">
+                <div class="col mt-5">
+                    <h1>
+                        Hello
+                    </h1>
+                    <p style="text-align: justify;">
+                        "Sed ut perspiciatis unde omnis iste natu
+                        s error sit voluptatem accusantium dolore
+                        mque laudantium, totam rem aperiam, eaque
+                         ipsa quae ab illo inventore veritatis et 
+                         quasi architecto beatae vitae dicta sunt
+                          explicabo. Nemo enim ipsam voluptatem qu
+                          ia voluptas sit aspernatur aut odit aut 
+                          fugit, sed quia consequuntur magni dolor
+                          es eos qui ratione voluptatem sequi nesc
+                          iunt. Neque porro quisquam est, qui dolore
+                          m ipsum quia dolor sit amet, consectetur,
+                           adipisci velit, sed quia non numquam eius modi tempora 
+                           incidunt ut labore et dolore magnam aliquam quaerat
+                            voluptatem. Ut enim ad minima veniam, quis nostrum 
+                            exercitationem ullam corporis suscipit laboriosam,
+                             nisi ut aliquid ex ea commodi consequatur? Quis autem
+                              vel eum iure reprehenderit qui in ea voluptate velit 
+                              esse quam nihil molestiae consequatur, vel illum qui 
+                              dolorem eum fugiat quo voluptas nulla pariatur?"
+                    </p>
+                </div>
+                <div class="col">
+                    <img src="{% static 'main/image/main.png' %}" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

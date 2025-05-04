@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page-title %} مدیریت {% endblock page-title %}
+
+{% block style %} {% static 'main/css/admin.css' %} {% endblock style %}
+
+{% block content %}
+    <section class="">
+        <div class="container">
+            <div class="row bg-section-color">
+                <div class="col text-center">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input name="button" type="submit" id="myButton" type="button" class="btn btn-info"  onclick="handleClick()" value="اضافه کردن گزارش">
+                    </form>
+                </div>
+                <div class="col text-center">
+                    <button type="button" class="btn btn-success">لیست گزارش ها</button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

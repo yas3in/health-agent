@@ -24,6 +24,8 @@ handler404 = 'apps.main.views.admin.custom_page_not_found'
 handler500 = 'apps.main.views.admin.custom_page_server_error'
 
 admin_urls = [
+    path('admin/modeladmin/', admin.site.urls),
+    path("admin/", include("apps.main.urls.admin"))
 ]
 
 front_urls = [
@@ -33,5 +35,5 @@ front_urls = [
 ]
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-] + front_urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+] + admin_urls + front_urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
