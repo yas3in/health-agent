@@ -1,0 +1,11 @@
+.bg-loging-color {
+    background-color: #BDDDE4;
+}
+
+.loging {
+    height: 350px;
+    width: 100%;
+    border: 1px solid #BDDDE4;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
