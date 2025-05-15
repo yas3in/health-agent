@@ -1,59 +1,25 @@
-
-/* wrapper باید ارتفاع کل صفحه را پوشش دهد */
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%; /* اطمینان از پر شدن کل صفحه */
-}
-
-/* main باید فضای خالی بین هدر و فوتر را پر کند */
-main {
-    flex: 1; /* فضای باقیمانده را پر می‌کند */
-}
-
-/* استایل فوتر */
-/* footer {
-    position: static;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    
-} */
-
-footer {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fde7e7;
-    color: #858585;
-    text-align: center;
-    margin: auto;
-    height: 50px;
-    padding-top: 15px;
-  }
-
-footer a {
+a {
     text-decoration: none;
-    background-color: #9a2323;
-    border-radius: 3px;
-    color: #ffffff;
-    font-size: 15px;
-    padding: 4px;
 }
 
-#version {
-    padding-right: 20px;
-    float: right;
-    font-size: 17px;
+.footer-bg {
+    background-color: #123458;
 }
 
-@media (max-width: 950px) {
-    footer {
-        position: fixed;
-        height: 30px;
-        padding-top: 7px;
-        padding-bottom: 5px;
-      }
-    
+.text-kerem-color {
+    color: #FFF1D5;
+}
+
+.copyright-bg {
+    background-color: #123458;
+}
+
+.copyright-p {
+    color: rgb(121, 121, 121);
+}
+
+.yasin {
+    background-color: aliceblue;
+    padding: 3px;
+    color: red!important;
 }
