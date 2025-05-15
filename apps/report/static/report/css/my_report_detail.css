@@ -93,6 +93,10 @@ form {
     background-color: #FFF1D5;
 }
 
+.empty {
+    height: 400px;
+}
+
 @media (max-width: 950px) {
 	.question {
         font-size: 20px;

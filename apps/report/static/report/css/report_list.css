@@ -35,6 +35,7 @@ a {
     color: #0c3d71;
 }
 .datas {
+    flex: 1;
     direction: rtl;
     margin-bottom: 50px;
     height: 150px;

@@ -9,7 +9,9 @@
     <!-- start model -->
 
     <!-- end modal -->
+     
     <div class="container-sm">
+        {% if responses.exists %}
         <div class="datas">
             <p class="fs-4 fw-bold gy-3 text-center">
                 سوالات و پاسخ های شما به این گزارش
@@ -64,5 +66,17 @@
             </div>
             <!-- end buttons -->
         </div>
+        {% else %}
+        <div class="row">
+            <div class="col empty text-center">
+                <p class="fs-4">
+                    شما هیچ محتوایی ندارید
+                </p>
+                <p>
+                <a href="{% url "report-list" %}">برگشت به صفحه اصلی</a>
+                </p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock content %}

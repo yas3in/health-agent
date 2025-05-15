@@ -7,40 +7,53 @@
 
 {% block content %}
     <div class="container-sm">
-        {% for response in responses %}
-        <div class="row datas">
-            <div class="col"></div>
-            <div class="col-10 reports">
+        {% if responses.exists %}
+            {% for response in responses %}
+            <div class="row datas">
+                <div class="col"></div>
+                <div class="col-10 reports">
 
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col">
-                        <h2>
-                            <a href="{% url 'my-report-detail' response.id %}" target="_blank">{{response.report.name}}</a>
-                        </h2>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col">
+                            <h2>
+                                <a href="{% url 'my-report-detail' response.id %}" target="_blank">{{response.report.name}}</a>
+                            </h2>
+                        </div>
+                        <div class="col-4 col-md-2">
+                            <p class="p-style time-style">پاسخ در: {{response.created_time}}</p>
+                        </div>   
+                        <div class="col-1"></div>
                     </div>
-                    <div class="col-4 col-md-2">
-                        <p class="p-style time-style">پاسخ در: {{response.created_time}}</p>
-                    </div>   
-                    <div class="col-1"></div>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-6 col-md-8">
+                            <p class="count-question">
+                            تعداد سوالات: {{response.answer_response.count}}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <label class="label">
+                                پاسخ داده شده
+                            </label>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-6 col-md-8">
-                        <p class="count-question">
-                           تعداد سوالات: {{response.answer_response.count}}
-                        </p>
-                    </div>
-                    <div class="col">
-                        <label class="label">
-                            پاسخ داده شده
-                        </label>
-                    </div>
-                    <div class="col"></div>
-                </div>
+                <div class="col"></div>
             </div>
-            <div class="col"></div>
+            {% endfor %}
+        {% else %}
+        <div class="row">
+            <div class="col empty text-center">
+                <p class="fs-4">
+                    شما هیچ محتوایی ندارید
+                </p>
+                <p>
+                <a href="{% url "report-list" %}">برگشت به صفحه اصلی</a>
+                </p>
+            </div>
         </div>
-        {% endfor %}
+        {% endif %}
     </div>
 {% endblock content %}

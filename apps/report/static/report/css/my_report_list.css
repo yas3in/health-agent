@@ -116,3 +116,7 @@ a {
         font-size: 10px;
     }    
 }
+
+.empty {
+    height: 400px;
+}
