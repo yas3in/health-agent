@@ -19,5 +19,5 @@ def admin_manage(request):
             check = main()
             if check:
                 return redirect("report-list")
-            raise Exception("error in add report")
+            return redirect("paneladmin")
     return redirect("report-list")
