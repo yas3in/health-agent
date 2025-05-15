@@ -15,7 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse_lazy
+from django.views.generic.base import RedirectView
+
 from django.conf.urls.static import static
 
 from config import settings
@@ -24,8 +26,8 @@ handler404 = 'apps.main.views.admin.custom_page_not_found'
 handler500 = 'apps.main.views.admin.custom_page_server_error'
 
 admin_urls = [
-    path('admin/modeladmin/', admin.site.urls),
-    path("admin/", include("apps.main.urls.admin"))
+    path('modeladmin/', admin.site.urls),
+    path("paneladmin/", include("apps.main.urls.admin"))
 ]
 
 front_urls = [
