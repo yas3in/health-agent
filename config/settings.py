@@ -127,7 +127,7 @@ LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'report-list'
+LOGIN_REDIRECT_URL = 'index'
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False

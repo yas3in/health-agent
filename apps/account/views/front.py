@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
@@ -46,3 +46,7 @@ def signup_view(request):
             return redirect('report-list')
         return render(request, "account/signup.html")
 
+
+def logout_view(request):
+    logout(request)
+    return redirect("index")
