@@ -1,14 +1,21 @@
+# databse
 *.sqlite3
 *.db
 
+# for env variable
 .env
 
+# media`s
 media
 
+# local file`s
 local_*
 
+# pycahce folders
 __pycache__
 
+# localy
 source_bot/
 
+# when use collectstatic
 /static
