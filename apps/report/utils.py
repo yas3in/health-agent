@@ -3,9 +3,15 @@ import requests
 from apps.report.models import Question, Report
 import jdatetime
 
-LIMESURVEY_PASSWORD = "Voice@Admin"
-LIMESURVEY_USERNAME = "Voice@Admin"
-LIMESURVEY_URL = "http://144.91.94.174:8080/index.php/admin/remotecontrol"
+from django.conf import settings
+
+
+
+LIMESURVEY_PASSWORD = settings.LIMESURVEY_PASSWORD
+LIMESURVEY_USERNAME = settings.LIMESURVEY_PASSWORD
+LIMESURVEY_URL = settings.LIMESURVEY_URL
+
+
 
 def release_session_key(session_key):
     payload = {"method": "release_session_key", "params": [session_key], "id": 1}
@@ -56,8 +62,8 @@ def save_question(report, question):
     
 
 def get_session_key():
-    payload = {"method": "get_session_key", "params": ["Voice@Admin", "Voice@Admin"], "id": 1}  
-    response = requests.post("http://144.91.94.174:8080/index.php/admin/remotecontrol", json=payload)
+    payload = {"method": "get_session_key", "params": [LIMESURVEY_USERNAME, LIMESURVEY_PASSWORD], "id": 1}  
+    response = requests.post(LIMESURVEY_URL, json=payload)
     if response.status_code == 200:
         return response.json().get("result")
     raise Exception(response.text)

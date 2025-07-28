@@ -7,8 +7,12 @@ from openai import OpenAI
 from apps.report.models import Answer, Question, Response
 from apps.voice_process.models import Voice
 
-AVALAI_BASE_URL = "https://api.avalai.ir/v1"
-AVALAI_API_KEY = "aa-jTQuoFCLBel2Wffo3ojPLmIK4t3wwXJxgfnxLHuQrkbrIuE0"
+from django.conf import settings
+
+
+
+AVALAI_BASE_URL = settings.AVALAI_BASE_URL
+AVALAI_API_KEY = settings.AVALAI_API_KEY
 
 class VoiceProcess:
 
