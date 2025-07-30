@@ -2,12 +2,15 @@ from django.http import Http404
 from django.views.decorators.http import require_POST
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from apps.report.models import Answer, Question, Report, Response
+from apps.report.serializer.front import ReportDetailSerializer
 from apps.voice_process import utils
 
 from io import BytesIO
-from django.contrib import messages
+
+from rest_framework.generics import ListAPIView
 
 
 class StreamingFile(BytesIO):
@@ -76,3 +79,14 @@ def delete_response(request):
             return redirect("my-reports-list")
     else:
         return Http404
+    
+
+
+class ReportDetailAPIView(ListAPIView):
+    serializer_class = ReportDetailSerializer
+    queryset = Report.objects.all()
+    lookup_url_kwarg = "sid"
+    lookup_field = "sid"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(sid=self.kwargs["id"])
