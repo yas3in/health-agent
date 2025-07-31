@@ -90,3 +90,14 @@ class ReportDetailAPIView(ListAPIView):
 
     def get_queryset(self):
         return super().get_queryset().filter(sid=self.kwargs["id"])
+
+
+def repdet(request, sid):
+    try:
+        report = Report.objects.get(sid=sid)
+    except Report.DoesNotExist:
+        raise Http404
+    
+    questions = Question.objects.filter(report=report)
+    if request.method == "GET":
+        return render(request, "report/repdet.html", {"report": report, "questions": questions})
