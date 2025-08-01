@@ -13,6 +13,7 @@ let counter = 0
 let question = document.querySelector("#question")
 question.innerHTML = question_object[counter]
 next.addEventListener("click", ()=> {
+    // transferVoiceToText(voice, question_object[counter])
     counter += 1;
     if (question_object[counter]) {
         question.innerHTML = question_object[counter]
@@ -23,3 +24,7 @@ next.addEventListener("click", ()=> {
         
     }
 })
+
+function transferVoiceToText(voice, question) {
+
+}

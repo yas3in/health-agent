@@ -19,3 +19,5 @@ source_bot/
 
 # when use collectstatic
 /static
+
+node_modules/
