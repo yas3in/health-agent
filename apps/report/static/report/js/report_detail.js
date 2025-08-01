@@ -26,5 +26,5 @@ next.addEventListener("click", ()=> {
 })
 
 function transferVoiceToText(voice, question) {
-
+ 
 }
