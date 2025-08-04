@@ -22,4 +22,4 @@ source_bot/
 
 node_modules/
 
-.env*
+.env.dev
