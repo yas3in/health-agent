@@ -24,11 +24,11 @@
             <hr class="dropdown-divider"/>
 
             <!-- question list div -->
-            {% comment %} <div class="row">
+            <div class="row">
                 <p class="col q-list gy-3">
                     Question's List
                 </p>
-            </div> {% endcomment %}
+            </div>
             <!-- end question list  -->
 
             <!-- get all question -->
@@ -49,6 +49,6 @@
             </div>
         </div>
     </div>
-    <script type="module" src="{% static "report/js/report_detail.js" %}"></script>
+    <script src="{% static "report/js/report_detail.js" %}" defer></script>
 {% endblock content %}
     

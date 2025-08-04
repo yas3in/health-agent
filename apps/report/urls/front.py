@@ -8,6 +8,4 @@ urlpatterns = [
     path("my-reports-list/", views.my_reports_list, name="my-reports-list"),
     path("my-reports-list/<int:id>/", views.my_report_detail, name="my-report-detail"),
     path("delete-response/", views.delete_response, name="delete-response"),
-    path("repdet/<int:id>/", views.ReportDetailAPIView.as_view(), name="rd"),
-    path("rp/<int:sid>/", views.repdet, name="rd-view"),
 ]

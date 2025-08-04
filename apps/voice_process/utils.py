@@ -118,7 +118,8 @@ def voice_process_api(voice, question):
         transcription = client.audio.transcriptions.create(
             model="whisper-1", 
             file=voice, 
-            response_format="text"
+            response_format="text",
+            language="fa"
         )
     except Exception as e:
         raise e

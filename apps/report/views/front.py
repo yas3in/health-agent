@@ -2,22 +2,8 @@ from django.http import Http404
 from django.views.decorators.http import require_POST
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 
 from apps.report.models import Answer, Question, Report, Response
-from apps.report.serializer.front import ReportDetailSerializer
-from apps.voice_process import utils
-
-from io import BytesIO
-
-from rest_framework.generics import ListAPIView
-
-
-class StreamingFile(BytesIO):
-    def __init__(self, file):
-        super().__init__(file.read())
-        self.name = file.name
-
 
 @login_required
 def report_list_view(request):
@@ -36,16 +22,10 @@ def report_detail_view(request, sid):
     if request.method == "GET":
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
     else:
-        audio_file = request.FILES["audio_file"]
-        if audio_file:
-            in_memory_file = StreamingFile(audio_file)
-            response = utils.VoiceProcess.handler(voice=in_memory_file, report=report, user=request.user)
-            if response is None:
-                return render(request, "report/report_detail.html", {"report": report, "questions": questions})
-            else:
-                save_voice = utils.save_voice(user=request.user, voice=audio_file, response=response)
-                return redirect("my-report-detail", id=response.id)
-        return render(request, "report/report_detail.html", {"report": report, "questions": questions})
+        # TODO 1: get reports and questions and answers
+        # TODO 2: save reports 
+        # TODO 3: redirect ro my reports
+        ...
         
 
 @login_required
@@ -79,25 +59,3 @@ def delete_response(request):
             return redirect("my-reports-list")
     else:
         return Http404
-    
-
-
-class ReportDetailAPIView(ListAPIView):
-    serializer_class = ReportDetailSerializer
-    queryset = Report.objects.all()
-    lookup_url_kwarg = "sid"
-    lookup_field = "sid"
-
-    def get_queryset(self):
-        return super().get_queryset().filter(sid=self.kwargs["id"])
-
-
-def repdet(request, sid):
-    try:
-        report = Report.objects.get(sid=sid)
-    except Report.DoesNotExist:
-        raise Http404
-    
-    questions = Question.objects.filter(report=report)
-    if request.method == "GET":
-        return render(request, "report/repdet.html", {"report": report, "questions": questions})

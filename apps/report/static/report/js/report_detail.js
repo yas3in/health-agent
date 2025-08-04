@@ -1,17 +1,15 @@
-function handler(audioFile) {
-    let response = transferVoiceToText(audioFile)
+let question_list = document.querySelectorAll("#questions li")
+
+let question_object = {}
+question_list.forEach( (value, index) => {
+question_object[index] = value.textContent;
+})
+
+async function handler() {
+    let response = await transferVoiceToText(audioFile)
     console.log(response);
-    
 }
-
-
-function listToObject(params) {
-    let question_list = document.querySelectorAll("#questions li")
-    let question_object = {}
-    question_list.forEach( (value, index) => {
-    question_object[index] = value.textContent;
-    return question_object
-})}
+ 
 
 function getCookie(name) {
     let cookieValue = null;
@@ -29,12 +27,12 @@ function getCookie(name) {
 }
 
 const csrftoken = getCookie('csrftoken');
-function transferVoiceToText(voice) {
+async function transferVoiceToText(voice) {
     const formData = new FormData();
     const question = document.querySelector("#question")
     formData.append("audio_file", voice);
     formData.append("question", question);
-    fetch('http://127.0.0.1:8000/voice/speech-to-text/', {
+    return fetch('http://127.0.0.1:8000/voice/speech-to-text/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrftoken
@@ -43,28 +41,27 @@ function transferVoiceToText(voice) {
     })
     .then(response => response.json())
     .then(data => {
-         console.log(data.text);
+        console.log(data);
+        return data;
     })
     .catch(error => {
         return error
     });
 }
 
-function nextQuestion(params) {    
-    let next = document.querySelector("#next")
-    let counter = 0
-    let question = document.querySelector("#question")
-    question.innerHTML = question_object[counter]
-    next.addEventListener("click", ()=> {
-        counter += 1;
-        if (question_object[counter]) {
-            question.innerHTML = question_object[counter]
-        } else {
-            next.disabled = true
-            console.log("finish");      
-        }
-    })
-}
+let next = document.querySelector("#next")
+let counter = 0
+let question = document.querySelector("#question")
+question.innerHTML = question_object[counter]
+next.addEventListener("click", ()=> {
+    counter += 1;
+    if (question_object[counter]) {
+        question.innerHTML = question_object[counter]
+        next.disabled = true
+    } else {
+        next.disabled = true    
+    }
+})
 
 let mediaRecorder;
 let audioChunks = [];
@@ -95,7 +92,6 @@ navigator.mediaDevices.getUserMedia({ audio: true })
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(audioFile);
             fileInput.files = dataTransfer.files;
-            handler(audioFile)
         };
     })
     .catch(error => {
