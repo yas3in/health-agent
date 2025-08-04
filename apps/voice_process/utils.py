@@ -1,3 +1,4 @@
+from io import BytesIO
 import json
 
 import jdatetime
@@ -101,3 +102,26 @@ def save_voice(user, response, voice):
             return instance
     except:
         return False
+    
+
+class StreamingFile(BytesIO):
+    def __init__(self, file):
+        super().__init__(file.read())
+        self.name = file.name
+
+def voice_process_api(voice, question):
+    client = OpenAI(
+        base_url=AVALAI_BASE_URL,
+        api_key=AVALAI_API_KEY
+    )
+    try:
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1", 
+            file=voice, 
+            response_format="text"
+        )
+    except Exception as e:
+        raise e
+    import json
+    return json.loads(transcription)
+    

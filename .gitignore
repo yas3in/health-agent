@@ -21,3 +21,5 @@ source_bot/
 /static
 
 node_modules/
+
+.env*

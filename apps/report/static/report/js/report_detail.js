@@ -13,22 +13,37 @@ function listToObject(params) {
     return question_object
 })}
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
+const csrftoken = getCookie('csrftoken');
 function transferVoiceToText(voice) {
-    const API_KEY = "aa-jTQuoFCLBel2Wffo3ojPLmIK4t3wwXJxgfnxLHuQrkbrIuE0"
     const formData = new FormData();
-    formData.append("file", voice);
-    formData.append("model", "whisper-1");
-    fetch('https://api.avalai.com/v1/speech-to-text', {  // مثال آدرس، آدرس دقیق API رو از مستندات بردار
+    const question = document.querySelector("#question")
+    formData.append("audio_file", voice);
+    formData.append("question", question);
+    fetch('http://127.0.0.1:8000/voice/speech-to-text/', {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + API_KEY
+            'X-CSRFToken': csrftoken
         },
         body: formData
     })
     .then(response => response.json())
     .then(data => {
-        return data.text
+         console.log(data.text);
     })
     .catch(error => {
         return error
