@@ -1,15 +1,22 @@
-let question_list = document.querySelectorAll("#questions li")
-
+let question_list = document.querySelectorAll("#questions li");
+let sendAnswers = document.querySelector("#sendAnswers");
+let answerPromises = [];
+sendAnswers.disabled = true;
 let question_object = {}
 question_list.forEach( (value, index) => {
 question_object[index] = value.textContent;
 })
 
-async function handler() {
-    let response = await transferVoiceToText(audioFile)
-    console.log(response);
+let responses = [];
+let report_sid = document.querySelector("#report_sid").textContent;
+
+
+function handleUserAnswer(audio) {
+    const promise = transferVoiceToText(audio);
+    answerPromises.push(promise);
 }
- 
+
+
 
 function getCookie(name) {
     let cookieValue = null;
@@ -29,9 +36,8 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 async function transferVoiceToText(voice) {
     const formData = new FormData();
-    const question = document.querySelector("#question")
+    const question = document.querySelector("#question").textContent;
     formData.append("audio_file", voice);
-    formData.append("question", question);
     return fetch('http://127.0.0.1:8000/voice/speech-to-text/', {
         method: 'POST',
         headers: {
@@ -41,8 +47,8 @@ async function transferVoiceToText(voice) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        return data;
+        responses.push({question: question, asnwer: data["success"]});
+        return data["success"];
     })
     .catch(error => {
         return error
@@ -54,12 +60,17 @@ let counter = 0
 let question = document.querySelector("#question")
 question.innerHTML = question_object[counter]
 next.addEventListener("click", ()=> {
+    handleUserAnswer(audioFile)
     counter += 1;
     if (question_object[counter]) {
         question.innerHTML = question_object[counter]
         next.disabled = true
     } else {
-        next.disabled = true    
+        next.disabled = true
+        sendAnswers.disabled = false;
+        document.getElementById('startButton').disabled = true;
+        console.log(responses);
+        
     }
 })
 
@@ -113,4 +124,30 @@ document.getElementById('stopButton').addEventListener('click', () => {
     mediaRecorder.stop();
     document.getElementById('startButton').disabled = false;
     document.getElementById('stopButton').disabled = true;
+});
+
+
+
+sendAnswers.addEventListener("click", () => {
+    sendAnswers.disabled = true;
+    sendAnswers.textContent = "در حال ارسال گزارش... لطفا صبر کنید";
+
+    Promise.all(answerPromises).then(() => {
+        console.log("همه پاسخ‌ها آماده‌اند:", responses);
+
+        sendReport(responses).then(() => {
+            console.log("گزارش با موفقیت ارسال شد");
+            window.location.href = "/next-page";
+        }).catch(error => {
+            console.error("خطا در ارسال گزارش:", error);
+            // پیام خطا و فعال کردن دوباره دکمه در صورت نیاز
+            sendAnswers.disabled = false;
+            sendAnswers.textContent = "ارسال گزارش";
+        });
+    }).catch(error => {
+        console.error("خطا در دریافت پاسخ‌ها:", error);
+        // اگر Promiseها reject شدن، هم میتونی دکمه رو فعال کنی یا پیام مناسب بدی
+        sendAnswers.disabled = false;
+        sendAnswers.textContent = "ارسال گزارش";
+    });
 });
