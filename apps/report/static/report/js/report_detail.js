@@ -1,3 +1,5 @@
+const BASE_URL = "http://127.0.0.1:8000" 
+
 let question_list = document.querySelectorAll("#questions li");
 let sendAnswers = document.querySelector("#sendAnswers");
 let answerPromises = [];
@@ -8,7 +10,7 @@ question_object[index] = value.textContent;
 })
 
 let responses = [];
-let report_sid = document.querySelector("#report_sid").textContent;
+let report_sid = document.querySelector("#report_sid").textContent.trim();
 
 
 function handleUserAnswer(audio) {
@@ -38,7 +40,7 @@ async function transferVoiceToText(voice) {
     const formData = new FormData();
     const question = document.querySelector("#question").textContent;
     formData.append("audio_file", voice);
-    return fetch('http://127.0.0.1:8000/voice/speech-to-text/', {
+    return fetch(BASE_URL + '/voice/speech-to-text/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrftoken
@@ -137,17 +139,36 @@ sendAnswers.addEventListener("click", () => {
 
         sendReport(responses).then(() => {
             console.log("گزارش با موفقیت ارسال شد");
-            window.location.href = "/next-page";
+            window.location.href = "reports/my-reports";
         }).catch(error => {
             console.error("خطا در ارسال گزارش:", error);
-            // پیام خطا و فعال کردن دوباره دکمه در صورت نیاز
             sendAnswers.disabled = false;
             sendAnswers.textContent = "ارسال گزارش";
         });
     }).catch(error => {
         console.error("خطا در دریافت پاسخ‌ها:", error);
-        // اگر Promiseها reject شدن، هم میتونی دکمه رو فعال کنی یا پیام مناسب بدی
         sendAnswers.disabled = false;
-        sendAnswers.textContent = "ارسال گزارش";
+        sendAnswers.textContent = "دریافت پاسخ ها با خطا مواجه شد";
     });
 });
+
+
+async function sendReport(data) {
+    const url = `${BASE_URL}/reports/${report_sid}/`;
+    console.log(url);
+    
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            report_sid: report_sid,
+            answers: data
+        })
+    }).then(response => {
+        if (!response.ok) throw new Error("خطا در ارسال گزارش");
+        return response.json();
+    });
+}
