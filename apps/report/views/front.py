@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from apps.report.models import Answer, Question, Report, Response
+from apps.voice_process.utils import RegisterAnswer
 
 @login_required
 def report_list_view(request):
@@ -24,9 +25,7 @@ def report_detail_view(request, sid):
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
     else:
         data = json.loads(request.body)
-        print(data)
-        with open("test.json", "w") as f:
-            f.writelines(data)
+        result = RegisterAnswer.handler(data, request.user)
         return JsonResponse({"status": True})
         
 

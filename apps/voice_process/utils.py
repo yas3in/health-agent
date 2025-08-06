@@ -5,7 +5,7 @@ import jdatetime
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
-from apps.report.models import Answer, Question, Response
+from apps.report.models import Answer, Question, Report, Response
 from apps.voice_process.models import Voice
 
 from django.conf import settings
@@ -15,7 +15,7 @@ from django.conf import settings
 AVALAI_BASE_URL = settings.AVALAI_BASE_URL
 AVALAI_API_KEY = settings.AVALAI_API_KEY
 
-class VoiceProcess:
+class RegisterAnswer:
 
     @staticmethod
     def chat_completions_api(text, questions):
@@ -37,55 +37,33 @@ class VoiceProcess:
             model=model_name, base_url=AVALAI_BASE_URL, api_key=AVALAI_API_KEY
         )
         return llm.invoke(messages).model_dump()["content"]
-    
-    @staticmethod
-    def voice_process_api(voice):
-        client = OpenAI(
-            base_url=AVALAI_BASE_URL,
-            api_key=AVALAI_API_KEY
-        )
-        try:
-            transcription = client.audio.transcriptions.create(
-                model="whisper-1", 
-                file=voice, 
-                response_format="text"
-            )
-        except Exception as e:
-            return None
-        return transcription
+
     
     @classmethod
-    def save_answer(cls, response, finaly_text):
-        dict_text = json.loads(finaly_text)
-        for i in dict_text.items():
-            question_instance = Question.objects.filter(question=i[0]).last()
-            answers = Answer.objects.create(
-                response=response, question=question_instance, answer=i[1], created_time=jdatetime.date.today()
-            )
+    def save_answer(cls, response, answers):
+        for i in answers:
+            for que, ans in i.items():
+                question_instance = Question.objects.filter(question=que).last()
+                answers = Answer.objects.create(
+                    response=response, question=question_instance, answer=ans, created_time=jdatetime.date.today()
+                )
         return True
             
     @classmethod
     def create_response(cls, report, user):
         time = jdatetime.date.today()
         instance = Response.objects.create(
-            report=report, user=user, created_time=time 
+            report=Report.objects.get(sid=report), user=user, created_time=time 
         )
         return instance
 
     @classmethod
-    def handler(cls, report, voice, user):
+    def handler(cls, data, user):
+        report = data["report_sid"]
+        answers = data["answers"]
         response = cls.create_response(report, user)
-        text = cls.voice_process_api(voice)
-        if text is None:
-            return None
-    
-        question_dict = {}
-        question_quesryset = report.question_report.all()
-        for i in question_quesryset:
-            question_dict[i.question] =  "بدون پاسخ"
-            
-        finaly_text = cls.chat_completions_api(text, question_dict)
-        save_answer = cls.save_answer(response, finaly_text)
+
+        save_answer = cls.save_answer(response, answers)
         if save_answer:
             return response
         else:
@@ -95,7 +73,7 @@ class VoiceProcess:
 def save_voice(user, response, voice):
     counts = Voice.objects.filter(response__user=user).count()
     try:
-        if counts < 10:
+        if counts < 20:
             instance = Voice.objects.create(
                 response=response, audio_file=voice
             )
@@ -124,6 +102,5 @@ def voice_process_api(voice):
         )
     except Exception as e:
         raise e
-    import json
     return json.loads(transcription)
     

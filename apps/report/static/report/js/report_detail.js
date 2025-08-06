@@ -49,7 +49,7 @@ async function transferVoiceToText(voice) {
     })
     .then(response => response.json())
     .then(data => {
-        responses.push({question: question, asnwer: data["success"]});
+        responses.push({[question]: data["success"]});
         return data["success"];
     })
     .catch(error => {
