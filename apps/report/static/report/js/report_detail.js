@@ -71,7 +71,6 @@ next.addEventListener("click", ()=> {
         next.disabled = true
         sendAnswers.disabled = false;
         document.getElementById('startButton').disabled = true;
-        console.log(responses);
         
     }
 })
@@ -139,7 +138,7 @@ sendAnswers.addEventListener("click", () => {
 
         sendReport(responses).then(() => {
             console.log("گزارش با موفقیت ارسال شد");
-            window.location.href = "reports/my-reports";
+            // window.location.href = "reports/my-reports";
         }).catch(error => {
             console.error("خطا در ارسال گزارش:", error);
             sendAnswers.disabled = false;
@@ -155,7 +154,13 @@ sendAnswers.addEventListener("click", () => {
 
 async function sendReport(data) {
     const url = `${BASE_URL}/reports/${report_sid}/`;
-    console.log(url);
+    let fd = new FormData()
+    fd.append("report_sid", report_sid)
+    fd.append("answers", data)
+    console.log(data)
+    console.log(report_sid);
+    ;
+    
     
     return fetch(url, {
         method: 'POST',
@@ -164,9 +169,9 @@ async function sendReport(data) {
             'X-CSRFToken': csrftoken
         },
         body: JSON.stringify({
-            report_sid: report_sid,
-            answers: data
-        })
+        report_sid: report_sid,
+        answers: data
+    })
     }).then(response => {
         if (!response.ok) throw new Error("خطا در ارسال گزارش");
         return response.json();

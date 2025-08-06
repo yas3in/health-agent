@@ -109,7 +109,8 @@ class StreamingFile(BytesIO):
         super().__init__(file.read())
         self.name = file.name
 
-def voice_process_api(voice, question):
+
+def voice_process_api(voice):
     client = OpenAI(
         base_url=AVALAI_BASE_URL,
         api_key=AVALAI_API_KEY

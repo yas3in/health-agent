@@ -1,4 +1,5 @@
-from django.http import Http404
+import json
+from django.http import Http404, JsonResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -22,10 +23,11 @@ def report_detail_view(request, sid):
     if request.method == "GET":
         return render(request, "report/report_detail.html", {"report": report, "questions": questions})
     else:
-        # TODO 1: get reports and questions and answers
-        # TODO 2: save reports 
-        # TODO 3: redirect ro my reports
-        ...
+        data = json.loads(request.body)
+        print(data)
+        with open("test.json", "w") as f:
+            f.writelines(data)
+        return JsonResponse({"status": True})
         
 
 @login_required
