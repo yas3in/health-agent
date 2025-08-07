@@ -23,3 +23,5 @@ source_bot/
 node_modules/
 
 .env.dev
+entrypoint.sh
+nginx/
