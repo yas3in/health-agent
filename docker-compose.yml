@@ -30,7 +30,34 @@ services:
     depends_on:
       - web
 
+  limesurvey:
+    image: acspri/limesurvey
+    container_name: limesurvey
+    restart: always
+    env_file:
+      - ./.env.dev
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./limesurvey/plugins:/var/www/html/plugins
+      - ./limesurvey/upload:/var/www/html/upload
+      - ./limesurvey/config:/var/www/html/application/config
+
+
+  mysql:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ya.1384.1214
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - ./.env.dev
+
+
 volumes:
   postgres_data:
   static_volume:
   media_volume:
+  mysql_data:
