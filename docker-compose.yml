@@ -26,8 +26,11 @@ services:
       - static_volume:/data_voice/static
       - media_volume:/data_voice/media
       - ./certbot/www:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
     ports:
-      - 80:80
+      - "80:80"
+      - "443:443"
     depends_on:
       - web
 
