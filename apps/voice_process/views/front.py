@@ -14,5 +14,4 @@ def transfer_voice_to_text(request):
             return JsonResponse({"error": "error"})
         else:
             save_voice = utils.save_voice(user=request.user, voice=audio_file, response=response)
-            return JsonResponse({"success": response["text"]})
-        
+            return JsonResponse({"success": response["text"]})  
