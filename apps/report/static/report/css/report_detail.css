@@ -72,6 +72,7 @@ html, body {
 #stopButton{
     background-color: rgb(126, 203, 226);
     color: #123458;
+    left: 0px;
 }
 
 button{
@@ -83,6 +84,14 @@ button{
 
 .form {
     display: inline;
+}
+
+.index-active {
+  z-index: 10;
+}
+
+.index-inactive {
+  z-index: 1;
 }
 
 .q-list {

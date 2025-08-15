@@ -115,16 +115,30 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 document.getElementById('startButton').addEventListener('click', () => {
     audioChunks = [];
     mediaRecorder.start();
-    document.getElementById('startButton').disabled = true;
-    document.getElementById('stopButton').disabled = false;
+
+    const startBtn = document.getElementById('startButton');
+    const stopBtn = document.getElementById('stopButton');
+
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    startBtn.classList.add('index-active');
+    stopBtn.classList.remove('index-active');
 });
 
 
 // دکمه متوقف کردن ضبط
 document.getElementById('stopButton').addEventListener('click', () => {
     mediaRecorder.stop();
-    document.getElementById('startButton').disabled = false;
-    document.getElementById('stopButton').disabled = true;
+
+    const startBtn = document.getElementById('startButton');
+    const stopBtn = document.getElementById('stopButton');
+
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+
+    startBtn.classList.add('index-active');
+    stopBtn.classList.remove('index-active');
 });
 
 

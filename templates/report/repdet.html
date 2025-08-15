@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+    
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+    
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+    
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+    
+                    // ایجاد URL برای پخش در پلیر (در صورت نیاز)
+                    document.getElementById('audioPlayer').src = audioUrl;
+    
+                    // فعال کردن دکمه ارسال بعد از ضبط
+                    document.getElementById('sendButton').disabled = false;
+    
+                    // اضافه کردن فایل صوتی به input مخفی برای ارسال به بک‌اند
+                    const audioFile = new File([audioBlob], 'recorded_audio.wav', { type: 'audio/wav' });
+                    const fileInput = document.getElementById('audioFileInput');
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(audioFile);
+                    fileInput.files = dataTransfer.files;
+                };
+            })
+            .catch(error => {
+                console.error("دسترسی به میکروفن با خطا مواجه شد:", error);
+            });
+    
+        // دکمه شروع ضبط
+        document.getElementById('startButton').addEventListener('click', () => {
+            audioChunks = [];
+            mediaRecorder.start();
+            document.getElementById('startButton').disabled = true;
+            document.getElementById('stopButton').disabled = false;
+        });
+    
+        // دکمه متوقف کردن ضبط
+        document.getElementById('stopButton').addEventListener('click', () => {
+            mediaRecorder.stop();
+            document.getElementById('startButton').disabled = false;
+            document.getElementById('stopButton').disabled = true;
+        });
+    </script>
+</body>
+</html>
