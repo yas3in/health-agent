@@ -89,7 +89,7 @@ The project includes a **Dockerfile** and a **docker-compose.yml** for easy setu
 ## Usage
 
 Once the container is running, access the service according to the configuration in your `docker-compose.yml` (for example, `http://localhost:8000` if defined).  
-Adjust environment variables in `.env` or `docker-compose.yml` as needed. You may refer to `.env.example` for reference.
+Adjust environment variables in `.env.dev` or `docker-compose.yml` as needed. You may refer to `.env.example` for reference.
 
 ---
 
