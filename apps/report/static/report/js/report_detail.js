@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:8000" 
+const BASE_URL = "https://voice-epi.ir" 
 
 let question_list = document.querySelectorAll("#questions li");
 let sendAnswers = document.querySelector("#sendAnswers");
@@ -152,7 +152,7 @@ sendAnswers.addEventListener("click", () => {
 
         sendReport(responses).then(() => {
             console.log("گزارش با موفقیت ارسال شد");
-            // window.location.href = "reports/my-reports";
+            window.location.href = "https://voice-epi.ir/reports/my-reports-list";
         }).catch(error => {
             console.error("خطا در ارسال گزارش:", error);
             sendAnswers.disabled = false;

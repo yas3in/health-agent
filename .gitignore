@@ -24,6 +24,7 @@ node_modules/
 
 .env.dev
 entrypoint.sh
-nginx/
+nginx.conf
 
 limesurvey
+certbot
